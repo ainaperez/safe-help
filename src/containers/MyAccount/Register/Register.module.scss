@@ -1,0 +1,31 @@
+@import "../../../variables";
+
+.registerForm {
+  margin: $px32 0;
+  @include flexCol;
+}
+
+.formContainer {
+  width: 324px;
+}
+
+@media (min-width: 728px) {
+  .formContainer {
+    width: 25%;
+  }
+}
+
+.container {
+  @include flexCol;
+  align-items: flex-start;
+}
+
+.acc {
+  text-align: center;
+}
+
+.btnForm {
+  display: block;
+  width: 100%;
+  border-radius: $border-rad;
+}

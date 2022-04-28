@@ -1,0 +1,26 @@
+$px32: 32px;
+$px24: 24px;
+$px12: 12px;
+$border-rad: 10px;
+
+$yellow: #e9c46a;
+$red: #e76f51;
+$orange: #f4a261;
+$green: #2fb1a2;
+
+@mixin spacing {
+  padding-top: 32px;
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+}
+
+@mixin flexRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flexCol {
+  @include flexRow;
+  flex-direction: column;
+}

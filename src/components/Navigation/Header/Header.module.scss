@@ -1,0 +1,17 @@
+@import "../../../variables";
+
+.header {
+  @include flexRow;
+  justify-content: space-between;
+  margin: $px12;
+
+  div {
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.logo {
+  width: 235px;
+}

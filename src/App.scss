@@ -1,0 +1,42 @@
+@import "variables";
+@import "~bootstrap/scss/bootstrap";
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,400;0,600;0,800;1,900&display=swap");
+
+//font-family: 'Nunito Sans', sans-serif;
+
+.App {
+}
+
+body {
+  font-family: "Nunito Sans", sans-serif;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: $px32;
+}
+
+p {
+  font-size: 16px;
+}
+p {
+  font-size: 16px;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+input,
+select {
+  height: 33px;
+  width: 100%;
+  font-size: 16px;
+  padding-left: 6px;
+  border: 1px solid #e5e5e5;
+  border-radius: $border-rad;
+  margin-bottom: $px24;
+}
