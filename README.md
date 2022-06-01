@@ -1,5 +1,8 @@
 # Getting Started with Create React App
 
+Aquesta aplicació segueix els scripts de Create-React-App.
+Actualment es troba en fases força incials de la programació així que els components es troben desorganitzats. Així mateix el codi no és el més eficient.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

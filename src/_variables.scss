@@ -16,6 +16,7 @@ $green: #2fb1a2;
 
 @mixin flexRow {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }

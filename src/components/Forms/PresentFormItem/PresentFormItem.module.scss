@@ -1,0 +1,13 @@
+@import "../../../variables";
+
+.PresentFormItem {
+  @include flexRow;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: $px24;
+  border-bottom: 1px solid #e5e5e5;
+
+  .title {
+    font-weight: bold;
+  }
+}

@@ -1,12 +1,16 @@
 import React, { Component } from 'react'; 
-import Aux from '../../hoc/Aux';
+import Aux from '../../hoc/Aux/Aux';
+
+
 
 class Organizer extends Component {
+
+    constructor(props) {
+        super(props);
+    }
     render() {
         return (
-            <Aux>
-                <p>Organizer works</p>
-            </Aux>
+           <p>organizer works</p>
         );
     }
 }

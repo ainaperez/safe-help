@@ -7,7 +7,6 @@ const navigationItem = (props) => (
         <NavLink
             to={props.link}
             exact
-            
             >{props.children}
         </NavLink>
     

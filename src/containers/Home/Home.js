@@ -1,40 +1,86 @@
 import React, { Component } from 'react'; 
-import Aux from '../../hoc/Aux';
-import classes from '../Home/Home.module.scss';
-import Search from '../../components/Search/Search';
+import Aux from '../../hoc/Aux/Aux';
+import Button from '@mui/material/Button'; 
+import '../../App.scss'
+import axios from 'axios'; 
+import Results from '../Results/Results'
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 
 class Home extends Component {
 
     constructor(props) {
-        super(props);
-        this.state = { apiResponse: "" };
+        super(props)
+        this.state= {
+            selectedCity: 'Berlin', 
+            selectedItem: '',
+            collectionPoints: null, 
+        }
+
+        this.getCollectionPoints = this.getCollectionPoints.bind(this);
     }
-    
-    callAPI() {
-        fetch("http://localhost:9000/testAPI")
-            .then(res => res.text())
-            .then(res => this.setState({ apiResponse: res }));
+
+    componentDidMount() {
+        this.getCollectionPoints();
+        
     }
-    
-    componentWillMount() {
-        this.callAPI();
+
+    getCollectionPoints =() =>{
+        axios.get('https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app/collectionPoints.json')
+        .then(response => {
+            const cpFilteredList = []
+            for(let key in response.data){
+                console.log(response.data[key].addressCity)
+                cpFilteredList.push({
+                    cpKey: key,
+                    details: response.data[key]
+                })
+            }
+            this.setState({
+                collectionPoints: cpFilteredList
+                
+            }) 
+            console.log(this.state.collectionPoints)
+        })
+        .catch(err => console.log(err))
+        
     }
+
+
     
     render() {
+
+        const searchFilter = (
+            
+            <form className='flex-row'>
+            <div className='formElement'>
+                
+                <label htmlFor=''>Where do you want to donate?</label>
+                <select id='selectedCity' type='text' placeholder='--any--'>
+                    <option value='Berlin'>Berlin</option>
+                    <option value='Hamburg'>Hamburg</option>
+                    <option value='Leipzig'>Leipzig</option>
+                    <option value='Cologne'>Cologne</option>
+                </select>
+
+            </div>
+            <div className='formElement'>
+                <label htmlFor=''>What do you want to donate?</label>
+                <input type='text' placeholder='--any--'></input>
+            </div>
+            <Button type='submit' variant="primary">Search</Button>
+        </form>
+        )
+
         return (
             <Aux>
-                <Search />
-                <div className={classes.cpSnippetContainer}>
-                    <div className={classes.cpSnippet}><a href='#' >Collection points in Berlin</a></div>
-                    <div className={classes.cpSnippet}><a href='#' >Collection points in Hamburg</a></div>
-                    <div className={classes.cpSnippet}><a href='#' >Collection points in Leipzig</a></div>
-                    <div className={classes.cpSnippet}><a href='#' >Collection points in Cologne</a></div>
-                </div>
-                <p>{this.state.apiResponse}</p>
-                <div className={classes.organizer}>
-                    <p>Or create a collection point</p>
-                    <a>I am an organizer</a>
-                </div>
+                <h1>Search a donation Collection point</h1>
+                {searchFilter}
+                <Results 
+                    selectedCity={this.state.selectedCity} 
+                    selectedItem={this.state.selectedItem} 
+                    collectionPoints={this.state.collectionPoints} />
+                
             </Aux>
         );
     }
