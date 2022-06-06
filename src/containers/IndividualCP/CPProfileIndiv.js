@@ -1,7 +1,6 @@
 import React, { Component } from 'react'; 
 import axios from 'axios'; 
 import '../../App.scss';
-import Aux from '../../hoc/Aux/Aux';
 import SnippetItem from '../../components/CPSnippet/SnippetItem/SnippetItem';
 import Divider from '@mui/material/Divider'
  

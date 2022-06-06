@@ -1,6 +1,6 @@
-import React, { Component } from 'react'; 
+import React from 'react'; 
 import PresentFormItem from '../../../../../components/Forms/PresentFormItem/PresentFormItem';
-import Button from 'react-bootstrap/Button'; 
+
 import '../../../../../App.scss';
 import AlertDialog from '../../../../../components/UI/AlertDialog';
 const Details = (props) => {

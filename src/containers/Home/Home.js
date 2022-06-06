@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'; 
 import Aux from '../../hoc/Aux/Aux';
-import Button from 'react-bootstrap/Button'; 
 import '../../App.scss'
 import axios from 'axios'; 
 import Results from '../Results/Results';
-import HomeImage from '../../assets/images/toa-heftiba-_UIVmIBB3JU-unsplash.jpeg'
-import Image from 'react-bootstrap/Image'
+
 
 import PlacesAutocomplete, {
     geocodeByAddress,
@@ -22,10 +20,7 @@ const Home = () => {
     const [filteredCPs, setFilteredCps] = useState(null); 
     
     useEffect(() => {
-        console.log('render')
         getCollectionPoints();
-        
-        
     }, [address])
    
     const handleChange = address => {
@@ -38,7 +33,6 @@ const Home = () => {
           .then(latLng => {
             setCoordinates([latLng.lat, latLng.lng]);
              setAddress(address);
-              console.log('Success', address, selectedCoordinates)
               filterPoints();
             }
               )
@@ -46,7 +40,6 @@ const Home = () => {
     }; 
 
     const getCollectionPoints =() =>{
-        console.log('running')
         axios.get('https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app/collectionPoints.json')
         .then(response => {
             const cpFilteredList = []
@@ -67,14 +60,12 @@ const Home = () => {
        const filteredCPs = [];
        
        collectionPoints.map(cp => {
-
-     
-
            if((cp.details.selectedCoordinates[0] > selectedCoordinates[0] - 1 &&
             cp.details.selectedCoordinates[0] < selectedCoordinates[0]+ 1 ) &&
             (cp.details.selectedCoordinates[1] > selectedCoordinates[1] - 1 &&
             cp.details.selectedCoordinates[1] < selectedCoordinates[1] + 1) ){
                 filteredCPs.push(cp);
+                return true;
             }else{
                 return false;
             }

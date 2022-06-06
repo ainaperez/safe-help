@@ -4,11 +4,11 @@ const SnippetItem = (props) => {
 
     const colorCode = (itemUrgency) => {
         let color = ''; 
-         if(itemUrgency == 'low'){
+         if(itemUrgency === 'low'){
              color = '#2fb1a2'
-         }else if(itemUrgency == 'normal'){
+         }else if(itemUrgency === 'normal'){
              color =  '#e9c46a'
-         }else if(itemUrgency == 'urgent'){
+         }else if(itemUrgency === 'urgent'){
              color = '#f4a261'
          }else{
              color =  '#e76f51'

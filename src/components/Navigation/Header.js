@@ -1,15 +1,12 @@
-import React, {useState} from 'react'; 
+import React from 'react'; 
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Nav from 'react-bootstrap/Nav';
-import Button from 'react-bootstrap/Button';
 import { useContext } from "react";
 import AuthContext from "../../AuthContext";
 import { logout } from '../../firebase';
-import CloseButton from 'react-bootstrap/CloseButton'
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import Aux from '../../hoc/Aux/Aux';
 import logo from '../../assets/images/Logo-color.png';
 
 const Header = () => {
@@ -17,7 +14,7 @@ const Header = () => {
   
   const handleLogout = async () => {
     await logout();
-    if(window.locations != '/'){
+    if(window.locations !== '/'){
       window.location = '/';
     }
    

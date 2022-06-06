@@ -1,28 +1,25 @@
 import React, { useContext, useState, useEffect } from 'react'; 
 import '../../../App.scss';
 import axios from 'axios';
-import Button from '../../../components/UI/Button';
 import Settings from '../Settings/Settings';
 import CPSnippet from '../../../components/CPSnippet/CPSnippet';
-import Spinner from 'react-bootstrap/Spinner';
 import AuthContext from '../../../AuthContext';
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext);
     const [collectionPoints, setCP] = useState(null);
     useEffect(() => {
-        getCollectionPoints()
-       
+        getCollectionPoints();
+        //eslint-disable-next-line react-hooks/exhaustive-deps
       }, [user])
 
     const getCollectionPoints = () =>{
-        
         axios.get('https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app/collectionPoints.json')
         .then(response => {
         var Cps= [];
         const data = response.data
         for(let key in data){
-            if(data[key].userId == user.uid){
+            if(data[key].userId === user.uid){
                 Cps.push({
                     key: key,
                     details: data[key]});

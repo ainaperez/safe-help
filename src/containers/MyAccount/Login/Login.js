@@ -1,5 +1,5 @@
-import React, { Component, useEffect } from 'react';
-import Aux from '../../../hoc/Aux/Aux';
+import React, { Component} from 'react';
+
 import '../../../App.scss';
 import Button from 'react-bootstrap/Button'; 
 import Input from '../../../components/UI/Input/Input'; 

@@ -1,13 +1,11 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from 'react-bootstrap/Button';
 import Typography from '@mui/material/Typography';
 import SnippetItem from './SnippetItem/SnippetItem';
 import { Link } from 'react-router-dom';
-const items = [];
+
 const CPSnippet = (props) => {
   const items = []; 
     for(let key in props.items){

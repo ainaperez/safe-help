@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, { useState, useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
@@ -20,6 +20,7 @@ const CPCreateSuccess = (props) => {
     }
     useEffect(() => {
         getCollectionPoint()
+         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     let title = (<p>Your Collection point has been created</p>)
 

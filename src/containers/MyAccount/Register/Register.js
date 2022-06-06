@@ -1,10 +1,8 @@
 import React, { Component } from 'react'; 
-import Aux from '../../../hoc/Aux/Aux';
 import '../../../App.scss';
 import Button from 'react-bootstrap/Button'; 
 import Input from '../../../components/UI/Input/Input'; 
 import {
-    auth,
     registerWithEmailAndPassword,
     signInWithGoogle,
   } from "../../../firebase";

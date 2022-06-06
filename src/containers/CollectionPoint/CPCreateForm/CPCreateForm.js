@@ -1,9 +1,7 @@
 import React, { useState, useEffect  } from 'react'; 
-import Aux from '../../../hoc/Aux/Aux';
 import '../../../App.scss';
 import Button from 'react-bootstrap/Button'; 
 import axios from 'axios';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Input from '../../../components/UI/Input/Input';
 import PlacesAutocomplete, {
     geocodeByAddress,
@@ -15,6 +13,7 @@ import AuthContext from '../../../AuthContext';
   const CPCreateForm = () => {
     const [address, setAddress] = useState(''); 
     const { user } = useContext(AuthContext);
+    // eslint-disable-next-line
     const [cp, setCp] = useState({
         userId: "",
         slug: "",
@@ -205,20 +204,22 @@ import AuthContext from '../../../AuthContext';
             formIsValid = updatedForm[inputIdentifier].valid && formIsValid;
         }
         setCreateForm(createForm = updatedForm);
-        formIsValid = formIsValid;
+      
     }
 
     const handleChange = address => {
-        console.log(address)
+       // eslint-disable-next-line
         setAddress(address = address);
     };
       
     const handleSelect = address => {
+        // eslint-disable-next-line
         setAddress(address = address );
         geocodeByAddress(address)
         .then(results => getLatLng(results[0]))
         .then(latLng => {
             cp.selectedCoordinates = [latLng.lat, latLng.lng];
+            // eslint-disable-next-line
             address = address;
             console.log('Success', address, latLng)}
         ) 
@@ -285,7 +286,7 @@ import AuthContext from '../../../AuthContext';
                     <form onSubmit={CPCreateFormHandler}>
                         {formElementsArray.map(formElement => {
                             console.log(formElement)
-                            if(formElement.id == 'address'){
+                            if(formElement.id === 'address'){
                                 return ( 
                                     <div className='input'>
                                     <label className='label'>{formElement.config.label}</label>

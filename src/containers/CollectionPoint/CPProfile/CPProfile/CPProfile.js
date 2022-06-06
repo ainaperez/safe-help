@@ -3,8 +3,7 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Tabs from 'react-bootstrap/Tabs';
 import '../../../../App.scss';
-import Tab from 'react-bootstrap/Tab'; 
-import Aux from '../../../../hoc/Aux/Aux'; 
+import Tab from 'react-bootstrap/Tab';  
 import Details from './Details/Details';
 import Items from './Items/Items';
 
@@ -70,12 +69,8 @@ class CPProfile extends Component {
     inputChangedHandler = ( event, inputIdentifier) => {
         const updatedForm = {
             ...this.state.item
-        };
-        const updatedFormElement = { 
-            ...updatedForm[inputIdentifier]
-        }   
-        updatedForm[inputIdentifier] = event.target.value ;
-        
+        };   
+        updatedForm[inputIdentifier] = event.target.value;
         this.setState({item : updatedForm});
     }
 

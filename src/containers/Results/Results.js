@@ -1,9 +1,7 @@
 import React, { Component } from 'react'; 
-import axios from 'axios'; 
 import '../../App.scss';
 import CPSnippet from '../../components/CPSnippet/CPSnippet';
-import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
-
+import { MapContainer, TileLayer, Marker} from 'react-leaflet';
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 
 class Results extends Component {
