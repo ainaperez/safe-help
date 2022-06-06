@@ -1,6 +1,6 @@
 import React, { useState, useEffect  } from 'react'; 
 import '../../../App.scss';
-import Button from 'react-bootstrap/Button'; 
+import Button from '../../../components/UI/Button'; 
 import axios from 'axios';
 import Input from '../../../components/UI/Input/Input';
 import PlacesAutocomplete, {
@@ -183,7 +183,6 @@ import AuthContext from '../../../AuthContext';
     }); 
 
     useEffect(()=>{
-       console.log(user)
        //console.log(cp.userId)
     }, [user])
 
@@ -221,7 +220,7 @@ import AuthContext from '../../../AuthContext';
             cp.selectedCoordinates = [latLng.lat, latLng.lng];
             // eslint-disable-next-line
             address = address;
-            console.log('Success', address, latLng)}
+        }
         ) 
         .catch(error => console.error('Error', error));
     };
@@ -243,7 +242,6 @@ import AuthContext from '../../../AuthContext';
 
     const CPCreateFormHandler = (e) =>{
         e.preventDefault();
-        console.log(user)
         const NewCp =  { 
                 userId: user.uid,
                 title:createForm.title.value,
@@ -259,10 +257,8 @@ import AuthContext from '../../../AuthContext';
                 website: createForm.website.value, 
                 items: [''] 
         };
-        console.log(NewCp);
         axios.post('https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app/collectionPoints.json', NewCp)
             .then(response => {
-               console.log(response); 
                window.location = `${response.data.name}/createsuccess`;
             }
             )
@@ -285,7 +281,6 @@ import AuthContext from '../../../AuthContext';
              <div className='inputContainer'>
                     <form onSubmit={CPCreateFormHandler}>
                         {formElementsArray.map(formElement => {
-                            console.log(formElement)
                             if(formElement.id === 'address'){
                                 return ( 
                                     <div className='input'>
@@ -333,7 +328,6 @@ import AuthContext from '../../../AuthContext';
                                     </div>
                                 )
                             }else{
-                                console.log(formElement.config.elementConfig)
                                 return (
                                     <Input 
                                     label={formElement.config.label}
@@ -348,7 +342,7 @@ import AuthContext from '../../../AuthContext';
                             )}
                                 })}
                         
-                    <Button type='submit' >CREATE COLLECTION POINT</Button>{' '}
+                    <Button type='submit' classes='basicButton' >CREATE COLLECTION POINT</Button>{' '}
                     </form>
             </div> 
             </div>

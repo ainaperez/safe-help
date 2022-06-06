@@ -1,6 +1,6 @@
 import React, { Component } from 'react'; 
 import axios from 'axios'; 
-import Button from 'react-bootstrap/Button';
+import Button from '../../../../components/UI/Button';
 import Tabs from 'react-bootstrap/Tabs';
 import '../../../../App.scss';
 import Tab from 'react-bootstrap/Tab';  
@@ -37,7 +37,6 @@ class CPProfile extends Component {
     getCollectionPoint =() =>{
         axios.get(`https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app${this.id}.json`)
         .then(response => {
-            console.log(response)
             this.setState({
                 collectionPoint: response.data
             })
@@ -55,13 +54,11 @@ class CPProfile extends Component {
             uneeded: this.state.item.uneeded, 
             ucollected: this.state.item.ucollected 
         }
-        this.state.collectionPoint.items.push(item)
-        console.log( this.state.collectionPoint.items)
+        this.state.collectionPoint.items.push(item);
         axios.put(`https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app${this.id}.json`, this.state.collectionPoint)
         .then(response => {
             this.getCollectionPoint();
-            console.log(response)}
-            )
+        })
         .catch(err => console.log(err)); 
 
     }
@@ -75,12 +72,8 @@ class CPProfile extends Component {
     }
 
     saveChanges = () => {
-       
-       console.log(this.state.collectionPoint)
         axios.put(`https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app${this.id}.json`, this.state.collectionPoint)
         .then(response => {
-            console.log('change saved')
-            console.log(response)
             this.getCollectionPoint()
         }).catch(error => {
             alert(`Error: ${error.message}`);
@@ -90,12 +83,10 @@ class CPProfile extends Component {
 
     editItemHandler = (event) => {
       event.preventDefault(); 
-
-      console.log(event)  
+      //Todo Edit Item Form
     }
 
     deleteItemHandler = () => {
-
 
     }
 
@@ -148,14 +139,17 @@ class CPProfile extends Component {
                             <label className='Label' htmlFor='ucollected'>Units collected</label>
                             <input className='InputElement' type='number' name='ucollected' placeholder='xxxx' onChange={(e)=>this.inputChangedHandler(e, 'ucollected')} />
                   
-                            <Button type='submit'>ADD</Button>
+                            <Button classes='basicButton' type='submit'>ADD</Button>
                     </form>
                     </div>
                 </div>
     
                 <hr />
     
-                <Items items={this.state.collectionPoint.items} editItem={this.handleItemChange} />
+                <Items 
+                items={this.state.collectionPoint.items} 
+                editItem={this.handleItemChange}
+                deleteItem={this.deleteItemHandler} />
                 </div>
             )
 

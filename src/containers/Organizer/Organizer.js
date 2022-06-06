@@ -2,7 +2,10 @@ import React from 'react';
 
 const Organizer = () => {
     return (
-        <p>organizer works</p>
+        <div>
+        <p>Page under construction</p>
+        <p>Coming soon!</p>
+        </div>
     );   
 }
 

@@ -17,6 +17,7 @@ const Items = (props) => {
                 ucollected={item.ucollected}
                 urgency={item.urgency}
                 key={item.id}
+                deleteiTEM={props.deleteItem}
 
               />
             );

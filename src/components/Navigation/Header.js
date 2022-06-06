@@ -20,10 +20,10 @@ const Header = () => {
    
     };
 
-  let authMenu = (<Nav.Link href='/login'>Sign In</Nav.Link>)
+  let authMenu = (<Nav.Link href='/login'><i className='bi bi-person-circle'></i></Nav.Link>)
   
   if (user) {
-    authMenu = (<NavDropdown title="My Account" id="basic-nav-dropdown">
+    authMenu = (<NavDropdown title='My Account' id='basic-nav-dropdown'>
                   <NavDropdown.Item href='/dashboard'>My Dashboard</NavDropdown.Item>
                   <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                 </NavDropdown>);
@@ -32,9 +32,9 @@ const Header = () => {
 return ( 
 
     
-      <Navbar key='lg' expand='lg' className="header">
+      <Navbar key='lg' expand='lg' className='header'>
     <Container fluid>
-    <Navbar.Brand href="/"><div>
+    <Navbar.Brand href='/'><div>
               <img src={logo} className='logo' alt='SafeHelp logo'></img>
               <p>Matching donations with collection points</p>
           </div></Navbar.Brand>
@@ -51,9 +51,9 @@ return (
 
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <Nav className="justify-content-end flex-grow-1 pe-3">
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/imorganizer">For organizers</Nav.Link>
+              <Nav className='justify-content-end flex-grow-1 pe-3'>
+                <Nav.Link href='/'>Home</Nav.Link>
+                <Nav.Link className='text-center' href='/imorganizer'>For organizers</Nav.Link>
                 {authMenu}
               
               </Nav>

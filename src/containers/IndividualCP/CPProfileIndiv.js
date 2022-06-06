@@ -37,7 +37,6 @@ class CPProfileIndiv extends Component {
 
         if(this.state.collectionPoint){
             items = this.state.collectionPoint.items
-            console.log(items)
         }
 
         let details = (<p>Loading...</p>);
@@ -49,11 +48,11 @@ class CPProfileIndiv extends Component {
             title= (<h1>{this.state.collectionPoint.title}</h1>)
             
             details = (
-                <div className='inidvidualCP'>
+                <div className='d-flex flex-md-column align-items-md-start flex-row'>
                 <div className='mr-24'>
                     <div className='individualData'>
                         <div className='flex-row-left'>
-                        <div className='square low'></div>
+                        <div className={this.state.collectionPoint.availability ? 'square low': 'square critical' }></div>
                         <p>{this.state.collectionPoint.availability ? 'Accepting donations': 'Not accepting donations'}</p>
                         </div>
                     </div>
@@ -62,7 +61,7 @@ class CPProfileIndiv extends Component {
                         
                     </div>
                     <div className='individualData'>
-                        <h3>Opening times</h3>
+                        <h3>Openning times</h3>
                         <p>{this.state.collectionPoint.openingTimes}</p>
                     </div>
                     <div className='individualData'>
@@ -126,7 +125,7 @@ class CPProfileIndiv extends Component {
                  
             {details}
             
-            <div class='flex-row squareContainer'>
+            <div class='d-flex flex-row align-items-center squareContainer'>
                 <div class='flex-row'>
                     <div class='square critical'></div>
                     <p>Critical</p>

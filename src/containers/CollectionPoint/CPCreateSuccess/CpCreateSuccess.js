@@ -1,21 +1,15 @@
 import React, { useState, useEffect} from 'react';
-import Button from 'react-bootstrap/Button';
+import Button from '../../../components/UI/Button';
 import axios from 'axios';
 
 const CPCreateSuccess = (props) => {
     let [collectionPoint, setCP] = useState(null);
     const id = window.location.pathname.replace('/createsuccess','');
     const getCollectionPoint = () => {
-        console.log(id)
         axios.get(`https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app/collectionPoints${id}.json`)
         .then(response => {
-            console.log(response)
-                setCP(collectionPoint = response.data)
-            
-            console.log(collectionPoint)
-         }
-            
-        )
+            setCP(collectionPoint = response.data)
+        })
         .catch(err => console.log(err))
     }
     useEffect(() => {
@@ -33,7 +27,7 @@ const CPCreateSuccess = (props) => {
        <h1>Success!</h1>
        <p>{title}</p>  
        <p>has been created</p>  
-       <Button onClick={() => window.location = `/collectionPoints${id}`}>ADD ITEMS</Button>
+       <Button classes='basicButton'click={() => window.location = `/collectionPoints${id}`}>ADD ITEMS</Button>
        </div>
     )
     

@@ -37,7 +37,7 @@ const AlertDialog = (props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>{props.cancel}</Button>
+          <Button click={handleClose}>{props.cancel}</Button>
           <Button click={props.action} autoFocus>
             {props.confirm}
           </Button>

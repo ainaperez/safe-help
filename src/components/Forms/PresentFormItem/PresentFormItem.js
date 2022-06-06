@@ -16,6 +16,7 @@ const PresentFormItem = (props) => {
         <p className='title'>{props.title}</p>
         <p>{props.value}</p>
         </div>
+        <div>
        <Button classes='editButton' click={handleOpen}>Edit</Button>
         <FormModal
             show={show}
@@ -24,7 +25,7 @@ const PresentFormItem = (props) => {
             editItem={props.editItem}
             saveEdit={props.saveEdit}
         />
-       
+       </div>
     </div>
 )
     

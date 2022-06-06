@@ -1,6 +1,7 @@
 @import "variables";
 @import "bootstrap/dist/css/bootstrap.css";
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,400;0,600;0,800;1,900&display=swap");
+@import "bootstrap-icons/font/bootstrap-icons.css";
 
 //font-family: 'Nunito Sans', sans-serif;
 
@@ -49,7 +50,7 @@ h1 {
 }
 
 h2 {
-  text-align: left;
+  text-align: center;
   font-size: 24px;
   font-weight: bold;
 }
@@ -135,10 +136,11 @@ form {
 
 //Buttons
 
-button {
+Button {
   border-radius: $border-rad;
   border: none;
   padding: 2px 8px;
+  margin: $px24 auto;
 }
 
 .editButton {
@@ -162,7 +164,6 @@ button {
 
 //Search
 .formDiv {
-  @include spacing;
   background-color: $yellow;
 }
 
@@ -195,12 +196,17 @@ button {
 
 //INPUTS
 
-.input {
+input {
   @include flexCol;
   align-items: flex-start;
   width: 100%;
-  padding: 10px;
   box-sizing: border-box;
+  outline: none;
+  border: 1px solid #ccc;
+  border-radius: $border-rad;
+  font: inherit;
+  padding: 6px 10px;
+  display: block;
 }
 
 .label {
@@ -496,24 +502,12 @@ button {
 
 //Individual CP
 
-.inidvidualCP {
-  @include flexCol;
-
-  .individualData {
-    margin-bottom: $px24;
-  }
-
-  .square {
-    margin-left: 0;
-  }
+.individualData {
+  margin-bottom: $px24;
 }
 
-@media (min-width: 728px) {
-  .inidvidualCP {
-    @include flexRow;
-    align-items: flex-start;
-    overflow-x: scroll;
-  }
+.square {
+  margin-left: 0;
 }
 
 .squareContainer {

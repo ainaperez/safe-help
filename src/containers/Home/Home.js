@@ -56,10 +56,8 @@ const Home = () => {
 
     const filterPoints = () => {
         console.log(collectionPoints)
-
-       const filteredCPs = [];
-       
-       collectionPoints.map(cp => {
+        const filteredCPs = [];
+        collectionPoints.map(cp => {
            if((cp.details.selectedCoordinates[0] > selectedCoordinates[0] - 1 &&
             cp.details.selectedCoordinates[0] < selectedCoordinates[0]+ 1 ) &&
             (cp.details.selectedCoordinates[1] > selectedCoordinates[1] - 1 &&
@@ -69,13 +67,8 @@ const Home = () => {
             }else{
                 return false;
             }
-            })
-        ;
-
+            });
         setFilteredCps(filteredCPs);
-
-       console.log(filteredCPs);
-
     }
 
     return(
@@ -89,8 +82,7 @@ const Home = () => {
                 <PlacesAutocomplete
                     value={address}
                     onChange={handleChange}
-                    onSelect={handleSelect}
-      >
+                    onSelect={handleSelect}>
                 {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                 <div className='d-flex flex-column homeSearch'>
                     <label className='label'>Where do you want to donate?</label>

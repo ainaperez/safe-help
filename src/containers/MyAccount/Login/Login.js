@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 
 import '../../../App.scss';
-import Button from 'react-bootstrap/Button'; 
+import Button from '../../../components/UI/Button'; 
 import Input from '../../../components/UI/Input/Input'; 
 import {logInWithEmailAndPassword, signInWithGoogle, sendPasswordReset } from '../../../firebase';
 
@@ -119,11 +119,12 @@ class Login extends Component {
                         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                 ))}
                 <Button 
+                    classes='basicButton'
                     type='submit' 
                     disabled={!this.state.formIsValid}>LOGIN</Button>
                 <Button 
-                    className="" 
-                    onClick={signInWithGoogle}>Login with Google</Button>
+                    classes='basicButton' 
+                    click={signInWithGoogle}>Login with Google</Button>
             </form>
         )
 
@@ -138,7 +139,7 @@ class Login extends Component {
                     </div>
 
                 <div className='acc'>  
-                <Button onClick={sendPasswordReset}>Forgot Password</Button>
+                <Button classes='footerButton' click={sendPasswordReset}>Forgot Password</Button>
                 <p>You don't have an account? <a href='/register'><strong>register</strong></a></p>
                 </div> 
             </div>

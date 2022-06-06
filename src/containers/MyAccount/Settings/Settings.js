@@ -33,6 +33,7 @@ const Settings = (props) => {
                 desc='If you click confirm, your account will be eliminated from the database. This action is NOT reversible!'
                 cancel='CANCEL'
                 confirm='CONFIRM'
+                btnClasses='dangerButton'
                 action={props.deleteCP}/>
              </Aux>
         )

@@ -26,48 +26,44 @@ const Dashboard = () => {
             }
         }  
         setCP(Cps)
-        console.log(Cps)
         })
         .catch(err => console.log(err))
     }
 
-        
-    
-
     let cps = (<p>Loading...</p>) 
-    console.log(user)
-        if(collectionPoints){
-            cps = ( 
-                collectionPoints.map(cp => {
-                    return (
-                        <CPSnippet  
-                            title={cp.details.title}
-                            address={cp.details.title}
-                            linkText='Edit'
-                            url={`/collectionPoints/${cp.key}`}
-                        />
-                    )
-                })  
-            )
-        }
-    
-        return (
-            <div>
-                 <h1>My Dashboard</h1>
-                 <div className='d-flex flex-sm-column flex-lg-row dashboard'>
-                 <section>
-                    <h2>Your collection points</h2>
 
-                    <a className='yellowLink' href='/createcp'>CREATE A COLLECTION POINT</a>
-                    <div className='cpUserList'>
-                    {cps}
-                    </div> 
-                   
-                 </section> 
-                 {<Settings />}
-                 </div>
-            </div>
-        );
+    if(collectionPoints){
+        cps = ( 
+            collectionPoints.map(cp => {
+                return (
+                    <CPSnippet  
+                        title={cp.details.title}
+                        address={cp.details.title}
+                        linkText='Edit'
+                        url={`/collectionPoints/${cp.key}`}
+                    />
+                )
+            })  
+        )
+    }
+    
+    return (
+        <div>
+                <h1>My Dashboard</h1>
+                <div className='d-flex flex-sm-column flex-lg-row dashboard'>
+                <section className='text-center'>
+                <h2>Your collection points</h2>
+
+                <a className='yellowLink' href='/createcp'>CREATE A COLLECTION POINT</a>
+                <div className='cpUserList'>
+                {cps}
+                </div> 
+
+                </section> 
+                {<Settings />}
+                </div>
+        </div>
+    );
     
 }
 
