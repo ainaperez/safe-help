@@ -3,10 +3,31 @@ $px24: 24px;
 $px12: 12px;
 $border-rad: 10px;
 
+$theme-colors: (
+  "primary": #e9c46a,
+  "warning": #f4a261,
+  "success": #2fb1a2,
+  "danger": #e76f51,
+);
+
 $yellow: #e9c46a;
 $red: #e76f51;
 $orange: #f4a261;
 $green: #2fb1a2;
+$white: #fff;
+
+//breakpoints
+
+$small: 576px;
+$medium: 768px;
+$large: 992px;
+$x-large: 1200px;
+
+//wrappers
+
+$lgWrapper: 90vw;
+$mdWrapper: 50vw;
+$smWrapper: 40vw;
 
 @mixin spacing {
   padding-top: 32px;

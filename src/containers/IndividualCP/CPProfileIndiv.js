@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../../App.scss';
 import Aux from '../../hoc/Aux/Aux';
 import SnippetItem from '../../components/CPSnippet/SnippetItem/SnippetItem';
+import Divider from '@mui/material/Divider'
  
 class CPProfileIndiv extends Component {
     state = {
@@ -21,18 +22,12 @@ class CPProfileIndiv extends Component {
     }
 
     getCollectionPoint =() => {
-        
-        console.log(this.id)
         axios.get(`https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app${this.id}.json`)
         .then(response => {
-            console.log(response)
-                this.setState({
-                    collectionPoint: response.data
-                })
-            console.log(this.state.collectionPoint)
-            
-         }
-            
+            this.setState({
+                collectionPoint: response.data
+            }) 
+         }  
         )
         .catch(err => console.log(err))
     }
@@ -64,10 +59,8 @@ class CPProfileIndiv extends Component {
                         </div>
                     </div>
                     <div className='individualData'>
-                        <p>{this.state.collectionPoint.addressStreet},{this.state.collectionPoint.addressNum}</p>
-                        <p>{this.state.collectionPoint.addressPostal}</p>
-                        <p>{this.state.collectionPoint.addressCity}</p>
-                        <p>{this.state.collectionPoint.addressCountry}</p>
+                        <p>{this.state.collectionPoint.address}</p>
+                        
                     </div>
                     <div className='individualData'>
                         <h3>Opening times</h3>
@@ -127,9 +120,9 @@ class CPProfileIndiv extends Component {
         
       
         return (
-            <Aux>
+            <div>
             {title}
-            <div class='wrapper'>
+            <div>
                 
                  
             {details}
@@ -153,7 +146,7 @@ class CPProfileIndiv extends Component {
                 </div>
             </div>
 
-            <hr></hr>
+            <Divider />
 
             <div className='flex-row snippetItemContainer'>
                 <p>Item</p>
@@ -164,7 +157,7 @@ class CPProfileIndiv extends Component {
     
             </div>
 
-            </Aux>
+            </div>
         );
     }
 }

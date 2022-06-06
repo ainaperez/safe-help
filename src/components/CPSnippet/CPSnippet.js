@@ -3,27 +3,23 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
+import Button from 'react-bootstrap/Button';
 import Typography from '@mui/material/Typography';
 import SnippetItem from './SnippetItem/SnippetItem';
 import { Link } from 'react-router-dom';
 const items = [];
 const CPSnippet = (props) => {
   const items = []; 
-  console.log(props.items)
-  for(let key in props.items){
-    
-    items.push({
-      key: key,
-      itemDetails: props.items[key]
-    })
-  }
-  console.log(items)
+    for(let key in props.items){
+      items.push({
+        key: key,
+        itemDetails: props.items[key]
+      })
+    }
 
     let itemList = (
         <div>
           {items.map((item) => {
-            console.log(item)
             return (
               <SnippetItem
                 title={item.itemDetails.title}
@@ -35,7 +31,6 @@ const CPSnippet = (props) => {
         </div>
       );
        
- 
     return(
         <Card className='CPSnippet' sx={{ minWidth: 275 }}>
         <CardContent>

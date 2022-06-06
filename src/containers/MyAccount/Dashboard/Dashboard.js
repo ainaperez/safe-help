@@ -1,70 +1,51 @@
-import React, { Component } from 'react'; 
+import React, { useContext, useState, useEffect } from 'react'; 
 import '../../../App.scss';
-import { getAuth } from "firebase/auth";
 import axios from 'axios';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import Button from '../../../components/UI/Button';
 import Settings from '../Settings/Settings';
 import CPSnippet from '../../../components/CPSnippet/CPSnippet';
+import Spinner from 'react-bootstrap/Spinner';
+import AuthContext from '../../../AuthContext';
 
-const auth = getAuth();
+const Dashboard = () => {
+    const { user } = useContext(AuthContext);
+    const [collectionPoints, setCP] = useState(null);
+    useEffect(() => {
+        getCollectionPoints()
+       
+      }, [user])
 
-class Dashboard extends Component {
-  
-    constructor(props){
-        super(props);   
-        this.state = {
-            user: auth.currentUser,
-            collectionPoints: [], 
-            loading: false,
-        }
-        this.getCollectionPoints = this.getCollectionPoints.bind(this);     
-    }; 
-
-    componentDidMount(){
-      this.getCollectionPoints();
-    }
-
-    getCollectionPoints = () =>{
+    const getCollectionPoints = () =>{
         
         axios.get('https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app/collectionPoints.json')
         .then(response => {
         var Cps= [];
         const data = response.data
         for(let key in data){
-            if(data[key].userId == this.state.user.uid){
+            if(data[key].userId == user.uid){
                 Cps.push({
                     key: key,
                     details: data[key]});
             }
         }  
-        this.setState({
-            collectionPoints: Cps,
-        });
+        setCP(Cps)
+        console.log(Cps)
         })
         .catch(err => console.log(err))
     }
 
-    deleteAccount = () => {
-        this.state.collectionPoints.map(cp => {
-            let key = cp.key
-            axios.delete(`https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app/collectionPoints/${key}.json`)
-        })
-        axios.delete('https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app/organizators.json')
-    }
+        
+    
 
-    render() {
-        let cps = (<p>...loading</p>) 
-        if(this.state.user){
-            cps = (
-                this.state.collectionPoints.map(cp => {
+    let cps = (<p>Loading...</p>) 
+    console.log(user)
+        if(collectionPoints){
+            cps = ( 
+                collectionPoints.map(cp => {
                     return (
-                        <CPSnippet 
+                        <CPSnippet  
                             title={cp.details.title}
-                            address={`${cp.details.addressStreet} ${cp.details.addressNum}, ${cp.details.addressPostal}, ${cp.details.addressCity}, ${cp.details.addressCountry} `}
+                            address={cp.details.title}
                             linkText='Edit'
                             url={`/collectionPoints/${cp.key}`}
                         />
@@ -76,20 +57,21 @@ class Dashboard extends Component {
         return (
             <div>
                  <h1>My Dashboard</h1>
+                 <div className='d-flex flex-sm-column flex-lg-row dashboard'>
+                 <section>
+                    <h2>Your collection points</h2>
 
-                 <div className='dashboard'>
-                    <section>
-                        <h2>Your collection points</h2>
-                            <Button href='/createcp'>CREATE A COLLECTION POINT</Button>
-                            <div className='cpUserList'>
-                        {cps}
-                        </div> 
-                    </section>
-                    {<Settings />}
-                </div>
+                    <a className='yellowLink' href='/createcp'>CREATE A COLLECTION POINT</a>
+                    <div className='cpUserList'>
+                    {cps}
+                    </div> 
+                   
+                 </section> 
+                 {<Settings />}
+                 </div>
             </div>
         );
-    }
+    
 }
 
 export default Dashboard; 

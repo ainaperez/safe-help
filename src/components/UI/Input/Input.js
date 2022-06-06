@@ -1,12 +1,6 @@
 
 import React from "react";
-
 import classes from "./Input.module.scss";
-import PlacesAutocomplete, {
-  geocodeByAddress, 
-  getLatLng, 
-  getLatlng
-} from 'react-places-autocomplete';
 
 const Input = (props) => {
   
@@ -23,7 +17,6 @@ const Input = (props) => {
           className={inputClasses.join(" ")}
           placeholder={props.elementConfig.placeholder}
           {...props.elementConfig}
-          placeholder={props.elementConfig.placeholder}
           value={props.value}
           onChange={props.changed}
         />
@@ -43,10 +36,11 @@ const Input = (props) => {
       case "checkbox":
       inputElement = (
         <checkbox
+          id='checkboxForm'
           className={inputClasses.join(" ")}
           {...props.elementConfig}
           onChange={props.changed}
-        />
+           />
       );
       break;
       

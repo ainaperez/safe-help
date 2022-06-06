@@ -1,6 +1,6 @@
-import * as React from 'react'; 
+import React, {useState} from 'react'; 
 import '../../../../../../App.scss'
-import Button from '@mui/material/Button';
+import Button from '../../../../../../components/UI/Button';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import SnippetItem from '../../../../../../components/CPSnippet/SnippetItem/SnippetItem';
@@ -19,9 +19,9 @@ const Item = (props) => {
         p: 4,
       };
 
-     const [open, setOpen] = React.useState(false);
-     const handleOpen = () => setOpen(true);
-     const handleClose = () => setOpen(false);
+     const [show, setShow] = React.useState(false);
+     const handleOpen = () => setShow(true);
+     const handleClose = () => setShow(false);
 
      return(
          
@@ -33,9 +33,9 @@ const Item = (props) => {
                 />
             <p>{props.ucollected}/<strong>{props.uneeded}</strong></p>
             
-            <Button onClick={handleOpen}>Edit</Button>
+            <Button classes='editButton' click={handleOpen}>Edit</Button>
                 <Modal
-                    open={open}
+                    show={show}
                     onClose={handleClose}
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
@@ -51,7 +51,8 @@ const Item = (props) => {
                             type='number' 
                             name='uneeded' 
                             placeholder={props.uneeded} 
-                            onChange={props.onChange} />
+                            onChange={props.onChange}
+                            min='0' />
                         </div>
                         <div>
                         <label htmlFor='ucollected'>Units collected</label>
@@ -59,7 +60,8 @@ const Item = (props) => {
                             type='number' 
                             name='ucollected' 
                             placeholder={props.ucollected} 
-                            onChange={props.onChange}  />
+                            onChange={props.onChange}
+                            min='0'  />
                         </div>
                         </div>
                         <div className='flex-row'>

@@ -1,89 +1,148 @@
-import React, { Component } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 import Aux from '../../hoc/Aux/Aux';
-import Button from '@mui/material/Button'; 
+import Button from 'react-bootstrap/Button'; 
 import '../../App.scss'
 import axios from 'axios'; 
-import Results from '../Results/Results'
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
+import Results from '../Results/Results';
+import HomeImage from '../../assets/images/toa-heftiba-_UIVmIBB3JU-unsplash.jpeg'
+import Image from 'react-bootstrap/Image'
 
-class Home extends Component {
+import PlacesAutocomplete, {
+    geocodeByAddress,
+    getLatLng,
+  } from 'react-places-autocomplete';
 
-    constructor(props) {
-        super(props)
-        this.state= {
-            selectedCity: 'Berlin', 
-            selectedItem: '',
-            collectionPoints: null, 
-        }
 
-        this.getCollectionPoints = this.getCollectionPoints.bind(this);
-    }
+const Home = () => {
 
-    componentDidMount() {
-        this.getCollectionPoints();
+    const [address, setAddress] = useState(''); 
+   
+    const [selectedCoordinates, setCoordinates] = useState([52.516330, 13.379575]);
+    const [collectionPoints, setCps] = useState(null); 
+    const [filteredCPs, setFilteredCps] = useState(null); 
+    
+    useEffect(() => {
+        console.log('render')
+        getCollectionPoints();
         
-    }
+        
+    }, [address])
+   
+    const handleChange = address => {
+       setAddress(address)
+      };
+     
+    const handleSelect = address => {
+        geocodeByAddress(address)
+          .then(results => getLatLng(results[0]))
+          .then(latLng => {
+            setCoordinates([latLng.lat, latLng.lng]);
+             setAddress(address);
+              console.log('Success', address, selectedCoordinates)
+              filterPoints();
+            }
+              )
+          .catch(error => console.error('Error', error));
+    }; 
 
-    getCollectionPoints =() =>{
+    const getCollectionPoints =() =>{
+        console.log('running')
         axios.get('https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app/collectionPoints.json')
         .then(response => {
             const cpFilteredList = []
             for(let key in response.data){
-                console.log(response.data[key].addressCity)
                 cpFilteredList.push({
                     cpKey: key,
                     details: response.data[key]
                 })
             }
-            this.setState({
-                collectionPoints: cpFilteredList
-                
-            }) 
-            console.log(this.state.collectionPoints)
+            setCps(cpFilteredList)
         })
-        .catch(err => console.log(err))
-        
+        .catch(err => console.log(err))    
     }
 
+    const filterPoints = () => {
+        console.log(collectionPoints)
 
-    
-    render() {
+       const filteredCPs = [];
+       
+       collectionPoints.map(cp => {
 
-        const searchFilter = (
-            
-            <form className='flex-row'>
-            <div className='formElement'>
-                
-                <label htmlFor=''>Where do you want to donate?</label>
-                <select id='selectedCity' type='text' placeholder='--any--'>
-                    <option value='Berlin'>Berlin</option>
-                    <option value='Hamburg'>Hamburg</option>
-                    <option value='Leipzig'>Leipzig</option>
-                    <option value='Cologne'>Cologne</option>
-                </select>
+     
 
+           if((cp.details.selectedCoordinates[0] > selectedCoordinates[0] - 1 &&
+            cp.details.selectedCoordinates[0] < selectedCoordinates[0]+ 1 ) &&
+            (cp.details.selectedCoordinates[1] > selectedCoordinates[1] - 1 &&
+            cp.details.selectedCoordinates[1] < selectedCoordinates[1] + 1) ){
+                filteredCPs.push(cp);
+            }else{
+                return false;
+            }
+            })
+        ;
+
+        setFilteredCps(filteredCPs);
+
+       console.log(filteredCPs);
+
+    }
+
+    return(
+        <div >
+            <div className='heroImg'>
+            <h1>WELCOME TO SAFEHELP</h1>
             </div>
-            <div className='formElement'>
-                <label htmlFor=''>What do you want to donate?</label>
-                <input type='text' placeholder='--any--'></input>
-            </div>
-            <Button type='submit' variant="primary">Search</Button>
-        </form>
-        )
-
-        return (
-            <Aux>
+            <div className='home'>
                 <h1>Search a donation Collection point</h1>
-                {searchFilter}
-                <Results 
-                    selectedCity={this.state.selectedCity} 
-                    selectedItem={this.state.selectedItem} 
-                    collectionPoints={this.state.collectionPoints} />
-                
-            </Aux>
-        );
-    }
-}
+                <Aux>
+                <PlacesAutocomplete
+                    value={address}
+                    onChange={handleChange}
+                    onSelect={handleSelect}
+      >
+                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                <div className='d-flex flex-column homeSearch'>
+                    <label className='label'>Where do you want to donate?</label>
+                    <input
+                    {...getInputProps({
+                        placeholder: 'Search Places ...',
+                        className: 'location-search-input',
+                    })}
+                    />
+                    <div className="autocomplete-dropdown-container">
+                    {loading && <div>Loading...</div>}
+                    {suggestions.map(suggestion => {
+                        const className = suggestion.active
+                        ? 'suggestion-item--active'
+                        : 'suggestion-item';
+                        // inline style for demonstration purpose
+                        const style = suggestion.active
+                        ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                        : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                        return (
+                        <div
+                            {...getSuggestionItemProps(suggestion, {
+                            className,
+                            style,
+                            })}
+                        >
+                            <span>{suggestion.description}</span>
+                        </div>
+                        );
+                    })}
+                    </div>
+                </div>
+                )}
+            </PlacesAutocomplete>
+            
+                    {collectionPoints ? <Results 
+                    collectionPoints={filteredCPs ? filteredCPs : collectionPoints} 
+                    selectedCoordinates={selectedCoordinates}/> : <p>Loading...</p>  } 
+                </Aux>
 
+        </div>
+            </div>
+    )
+
+}
 export default Home; 

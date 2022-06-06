@@ -14,22 +14,19 @@ class Results extends Component {
     
     }; 
 
-    
+    render(){
 
-    render() {
         let list = (<p>Loading...</p>)
-        let map = (<p>Map Loading</p>)
 
         if(this.props.collectionPoints){
             
             list = (<div className='cpList'>
                     {this.props.collectionPoints.map(cp =>{
-                        let completeAddress = `${cp.details.addressStreet} ${cp.details.addressNum}, ${cp.details.addressPostal}, ${cp.details.addressCity}, ${cp.details.addressCountry} `;
-                         console.log(cp)
+                        
                             return (
                                 <CPSnippet 
                                     title={cp.details.title}
-                                    address={completeAddress}
+                                    address={cp.details.address}
                                     items={cp.details.items}
                                     linkText='Go to details'
                                     url={`/collectionPoint/${cp.cpKey}`}
@@ -38,24 +35,30 @@ class Results extends Component {
                         } ) 
                     }
                     </div>)   
+
         }
 
-        const position = [52.516330, 13.379575]
+        const coordinates = this.props.selectedCoordinates; 
+        console.log(coordinates) 
 
 
         return (
             
             <div className='resultsContainer flex-row'>
-                <MapContainer className='mapContainer' center={position} zoom={13} scrollWheelZoom={false}>
+                <MapContainer className='mapContainer' center={coordinates} zoom={13} scrollWheelZoom={false}>
                     <TileLayer
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    <Marker position={position}>
-                        {/*<Popup>
-                       
-                        </Popup>*/}
-                    </Marker>
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                    {this.props.collectionPoints.map(cp =>{
+                        let markerPosition = [cp.details.selectedCoordinates[0], cp.details.selectedCoordinates[1]]
+                        return (
+                            <Marker position={markerPosition}> 
+                                {/*<Popup>
+                            
+                                </Popup>*/}
+                            </Marker>
+                        )
+                        }) 
+                    }
                 </MapContainer>
             {list}
             
@@ -65,4 +68,6 @@ class Results extends Component {
     }
 }
 
-export default Results; 
+
+
+export default Results;

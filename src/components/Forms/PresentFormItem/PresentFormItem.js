@@ -1,7 +1,7 @@
 import * as React from 'react'; 
 import classes from './PresentFormItem.module.scss' 
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
+import Button from '../../UI/Button';
+import FormModal from '../../UI/FormModal';
 import Box from '@mui/material/Box';
 import Input from '../../UI/Input/Input';
 
@@ -18,9 +18,9 @@ const PresentFormItem = (props) => {
         p: 4,
       };
     
-    const [open, setOpen] = React.useState(false);
-     const handleOpen = () => setOpen(true);
-     const handleClose = () => setOpen(false);
+    const [show, setShow] = React.useState(false);
+     const handleOpen = () => setShow(true);
+     const handleClose = () => setShow(false);
 
      return(
         <div className={classes.PresentFormItem}>
@@ -28,27 +28,15 @@ const PresentFormItem = (props) => {
         <p className={classes.title}>{props.title}</p>
         <p>{props.value}</p>
         </div>
-       <Button onClick={handleOpen}>Edit</Button>
-        <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-        >
-                    <Box sx={style}>
-                    <Button onClick={handleClose}>X</Button>  
-                    <Input 
-                        label={props.label}
-                        key={props.key}
-                        elementType={props.elementType}
-                        elementConfig={props.elementConfig}
-                        value={props.value}
-                        invalid={props.valid}
-                        shouldValidate={props.validation}
-                        touched={props.touched}
-                        changed={props.changed} />
-                    </Box>
-                </Modal>
+       <Button classes='editButton' click={handleOpen}>Edit</Button>
+        <FormModal
+            show={show}
+            onHide={handleClose}
+            title={props.title}
+            editItem={props.editItem}
+            saveEdit={props.saveEdit}
+        />
+       
     </div>
 )
     

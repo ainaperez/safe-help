@@ -1,13 +1,13 @@
 import React from 'react'; 
 import Aux from '../Aux/Aux';
-import Header from '../../components/Navigation/Header/Header';
-import classes from './Layout.module.scss';
-import Footer from '../../components/Navigation/Footer/Footer'; 
+import Header from '../../components/Navigation/Header';
+import '../../App.scss'
+import Footer from '../../components/Navigation/Footer'; 
 
 const layout = (props) => (
     <Aux>
     <Header />
-    <main className={classes.layout}>
+    <main className='layout'>
         {props.children}
     </main>
     <Footer />

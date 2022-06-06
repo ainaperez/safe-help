@@ -1,8 +1,7 @@
 import React, { Component } from 'react'; 
-
 import Aux from '../../../hoc/Aux/Aux';
 import '../../../App.scss';
-import Button from '@mui/material/Button'; 
+import Button from 'react-bootstrap/Button'; 
 import Input from '../../../components/UI/Input/Input'; 
 import {
     auth,
@@ -161,7 +160,7 @@ class Register extends Component {
             </form>
         )
         return (
-            <Aux>
+            <div className='smallWrapper'>
                  <h1>Register for organizers</h1>
                     <div className='formContainer'>
                         <div className='container'>
@@ -170,7 +169,7 @@ class Register extends Component {
                     </div>
 
                 <p className='acc'>You already have an account? <a href='/login'><strong>login</strong></a></p>
-            </Aux>
+            </div>
         );
     }
 }

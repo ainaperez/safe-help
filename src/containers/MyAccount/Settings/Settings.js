@@ -3,13 +3,12 @@ import Aux from '../../../hoc/Aux/Aux';
 import '../../../App.scss'; 
 import PresentFormItem from '../../../components/Forms/PresentFormItem/PresentFormItem';
 import { useContext } from "react";
-import AlertDialog from '../../../components/UI/AlertDialog/AlertDialog';
-
+import AlertDialog from '../../../components/UI/AlertDialog';
 import AuthContext from '../../../AuthContext';
-
 
 const Settings = (props) => {
     const { user } = useContext(AuthContext);
+
     let form = (<p>...loading</p>)
     if(user){
         form = ( 

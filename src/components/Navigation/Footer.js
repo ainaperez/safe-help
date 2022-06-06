@@ -1,11 +1,11 @@
 import React from 'react'; 
-import classes from './Footer.module.scss';
+import '../../App.scss';
 
-import logo from '../../../assets/images/Logo-gray.png';
+import logo from '../../assets/images/Logo-color.png';
 
 const footer = () => (
-    <div className={classes.footer}>
-        <img src={logo} className={classes.logo} alt='SafeHelp logo'></img>
+    <div className='footer'>
+        <img src={logo} className='footerLogo' alt='SafeHelp logo'></img>
         <div>
             <a href='#' target='_blank'>About &amp; contact</a>
             <a href='#' target='_blank'>FAQs</a>

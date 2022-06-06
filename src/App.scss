@@ -1,5 +1,5 @@
 @import "variables";
-
+@import "bootstrap/dist/css/bootstrap.css";
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,400;0,600;0,800;1,900&display=swap");
 
 //font-family: 'Nunito Sans', sans-serif;
@@ -9,17 +9,42 @@
   padding: 0;
 }
 
-.App {
-}
-
 body {
   font-family: "Nunito Sans", sans-serif;
+}
+
+.layout {
+  @include flexRow;
+  padding: 0 0 32px 0px;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  min-height: 70vh;
+  width: 100vw;
+
+  .smallWrapper  {
+    width: 320px;
+    @media (min-width: $small) {
+      width: 33vw;
+    }
+  }
+}
+
+.smallWrapper  {
+  min-width: 320px;
+  background-color: $yellow;
+}
+
+@media (min-width: $small) {
+  .smallWrapper  {
+    max-width: 50vw;
+  }
 }
 
 h1 {
   font-size: 24px;
   font-weight: bold;
   text-align: center;
+  margin-top: $px32;
   margin-bottom: $px32;
 }
 
@@ -44,6 +69,11 @@ a {
   text-decoration: none;
 }
 
+.yellowLink {
+  color: $yellow;
+  font-weight: bold;
+}
+
 //General classes
 
 .flex-row {
@@ -63,6 +93,16 @@ a {
   }
 }
 
+//Menu
+
+.menu {
+  position: relative;
+  z-index: 999;
+}
+
+.show {
+}
+
 //Forms
 
 form {
@@ -79,13 +119,8 @@ form {
 
 @media (min-width: 728px) {
   .formContainer {
-    width: 30%;
+    width: 100%;
   }
-}
-
-.container {
-  @include flexCol;
-  align-items: flex-start;
 }
 
 .acc {
@@ -97,6 +132,30 @@ form {
   width: 100%;
   border-radius: $border-rad;
 }
+
+//Buttons
+
+button {
+  border-radius: $border-rad;
+  border: none;
+  padding: 2px 8px;
+}
+
+.editButton {
+  background-color: transparent;
+  border: none;
+}
+
+.basicButton {
+  background-color: $yellow;
+  font-weight: bold;
+}
+
+.dangerButton {
+  background-color: $red;
+  font-weight: bold;
+}
+
 //Search
 .formDiv {
   @include spacing;
@@ -130,15 +189,143 @@ form {
   background-color: white;
 }
 
+//INPUTS
+
+.input {
+  @include flexCol;
+  align-items: flex-start;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.inputElement {
+  outline: none;
+  border: 1px solid #ccc;
+  border-radius: $border-rad;
+  font: inherit;
+  padding: 6px 10px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.inputElement:focus {
+  outline: none;
+  background-color: #ccc;
+}
+
+.invalid {
+  border: 1px solid red;
+  background-color: salmon;
+}
+
+//Header
+
+.header {
+  padding: $px12;
+  background-color: $yellow;
+
+  p {
+    color: $white;
+  }
+}
+
+.navbar > .container-fluid {
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 40%;
+}
+
+.nav-link {
+  color: black;
+}
+
+.nav-link:hover,
+.nav-link:focus,
+.nav-link:hover {
+  color: $yellow;
+}
+
+.navbar-light .navbar-toggler {
+  padding: 0;
+  color: black;
+  border: none;
+}
+
+.navbar-toggler:focus {
+  text-decoration: none;
+  outline: 0;
+  box-shadow: none;
+}
+
+.navbar-toggler-icon {
+  background-image: none !important;
+}
+
+.burgerLine {
+  width: 30px;
+  margin: 8px 0;
+  height: 2px;
+  background-color: $white;
+}
+
+//Footer
+
+.footer {
+  @include flexCol;
+  padding: 32px 0;
+  background-color: $yellow;
+
+  p {
+    color: $white;
+  }
+
+  div {
+    @include flexCol;
+    margin-top: $px32;
+  }
+}
+
+.footerLogo {
+  width: 200px;
+}
+
 //home
 
-.css-pwngrv-MuiPaper-root-MuiCard-root {
-  border-radius: $border-rad;
-  width: 90%;
-  margin: 0 auto $px24 auto;
+.home {
+  width: $lgWrapper;
+  margin: auto;
 }
-.css-1t6e9jv-MuiCardActions-root {
-  padding: 0;
+
+.heroImg {
+  @include flexRow;
+  height: 300px;
+  width: 100vw;
+  background-image: url("./assets/images/toa-heftiba-_UIVmIBB3JU-unsplash.jpeg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  h1 {
+    color: white;
+  }
+}
+
+.homeSearch {
+  width: 100%;
+  margin: auto;
+  @media (min-width: $small) {
+    width: 40vw;
+  }
 }
 
 .organizer {
@@ -198,6 +385,7 @@ form {
 .SnippetItem {
   display: inline-block;
   padding: 4px;
+  margin-right: 4px;
   border-radius: $border-rad;
 }
 
@@ -242,8 +430,7 @@ form {
 //Dashboard
 
 .dashboard {
-  @include flexCol;
-
+  width: $lgWrapper;
   section {
     width: 100vw;
 
@@ -255,38 +442,52 @@ form {
 
 .cpUserList {
   @include flexRow;
+  margin: $px32 0;
+  justify-content: start;
   overflow-x: scroll;
-
-  .snippetCard {
-    width: 230px;
-    border: 1px solid gray;
-    border-radius: $border-rad;
-    margin-right: $px12;
-  }
 }
 
-@media (min-width: 728px) {
+@media (min-width: $large) {
   .dashboard {
-    @include flexRow;
-    align-items: flex-start;
-    width: 910px;
-
-    section {
-      width: 30vw;
-    }
+    width: 80vw;
+    margin: auto;
   }
   .cpUserList {
     @include flexCol;
     align-items: flex-start;
     overflow-x: scroll;
-
-    .snippetCard {
-      width: 470px;
-      border: 1px solid gray;
-      border-radius: $border-rad;
-      margin-right: $px12;
-    }
   }
+}
+
+//Snippet Cards
+
+.css-pwngrv-MuiPaper-root-MuiCard-root {
+  transition: all 0.5s ease-in;
+  height: 200px;
+  border-radius: $border-rad;
+  width: 90%;
+  margin: 0 $px24 $px24 auto;
+  box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+
+  @media (min-width: $large) {
+    margin: 0 auto $px24 auto;
+  }
+}
+
+.css-pwngrv-MuiPaper-root-MuiCard-root:hover {
+  transform: scale(1.01);
+}
+
+.css-46bh2p-MuiCardContent-root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: $px12 !important;
+  //border: 1px solid gray;
+}
+.css-1t6e9jv-MuiCardActions-root {
+  padding: 0 !important;
 }
 
 //Individual CP
@@ -342,4 +543,14 @@ form {
 .snippetItemContainer {
   margin: 0 $px32 $px12 $px32;
   justify-content: space-between;
+}
+
+//CPProfile
+
+.cPprofile {
+  width: $lgWrapper;
+
+  @media (min-width: $large) {
+    width: $smWrapper;
+  }
 }

@@ -1,51 +1,55 @@
 import React, { Component, useEffect } from 'react';
-
 import Aux from '../../../hoc/Aux/Aux';
 import '../../../App.scss';
-import Button from '@mui/material/Button'; 
+import Button from 'react-bootstrap/Button'; 
 import Input from '../../../components/UI/Input/Input'; 
 import {logInWithEmailAndPassword, signInWithGoogle, sendPasswordReset } from '../../../firebase';
+
+
 class Login extends Component {
 
-    state = {
-        loginForm: {
-            email: {
-                label: 'Email',
-                elementType: 'input',
-                elementConfig: {
-                    type: 'email',
-                    placeholder: 'Your E-Mail'
+    constructor(){
+        super();
+        this.state = {
+            loginForm: {
+                email: {
+                    label: 'Email',
+                    elementType: 'input',
+                    elementConfig: {
+                        type: 'email',
+                        placeholder: 'Your E-Mail'
+                    },
+                    value: '',
+                    validation: {
+                        required: true,
+                        isEmail: true
+                    },
+                    valid: false,
+                    touched: false
                 },
-                value: '',
-                validation: {
-                    required: true,
-                    isEmail: true
+                password:{
+                    label: 'Password',
+                    elementType: 'input',
+                    elementConfig: {
+                        type: 'password',
+                        placeholder: 'Enter a password'
+                    },
+                    value: '',
+                    validation: {
+                        required: true,
+                        isPassword: true
+                    },
+                    valid: false,
+                    touched: false
                 },
-                valid: false,
-                touched: false
-            },
-            password:{
-                label: 'Password',
-                elementType: 'input',
-                elementConfig: {
-                    type: 'password',
-                    placeholder: 'Enter a password'
-                },
-                value: '',
-                validation: {
-                    required: true,
-                    isPassword: true
-                },
-                valid: false,
-                touched: false
-            },
+            }
         }
     }
-   
 
+    
     loginHandler = (e) =>{
         e.preventDefault();
-        logInWithEmailAndPassword(this.state.loginForm.email.value, this.state.loginForm.password.value); 
+       logInWithEmailAndPassword(this.state.loginForm.email.value, this.state.loginForm.password.value); 
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
@@ -124,11 +128,11 @@ class Login extends Component {
         )
 
         return (
-            <Aux>
+            <div className='smWrapper'>
                 <h1>Login for organizers</h1>
                     
                 <div className='formContainer'>
-                        <div className='container'>
+                        <div className='inputContainer'>
                         {form}
                         </div>
                     </div>
@@ -137,7 +141,7 @@ class Login extends Component {
                 <Button onClick={sendPasswordReset}>Forgot Password</Button>
                 <p>You don't have an account? <a href='/register'><strong>register</strong></a></p>
                 </div> 
-            </Aux>
+            </div>
         );
     }
 }; 

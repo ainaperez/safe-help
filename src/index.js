@@ -4,6 +4,20 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider }  from './AuthProvider';
+import axios from 'axios'; 
+
+//axios.defaults.headers.put[''] = ; 
+
+axios.interceptors.request.use(req => {
+  console.log(req)
+  //res.set('Access-Control-Allow-Origin', '*');
+
+  return req;
+}, error => {
+  console.log(error); 
+  return Promise.reject(error);
+}); 
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

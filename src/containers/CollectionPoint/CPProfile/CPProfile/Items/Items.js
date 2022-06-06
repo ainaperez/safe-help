@@ -6,7 +6,8 @@ const Items = (props) => {
 
     let itemList = (
         <div className='snippetItemContainer'>
-          {props.items.map((item) => {
+          {props.items.slice(1).map((item) => {
+
             return (
               <Item
                 editItem={props.editItem}

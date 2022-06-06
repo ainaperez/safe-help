@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import Button from './Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -19,7 +19,7 @@ const AlertDialog = (props) => {
 
   return (
     <div>
-      <Button variant="outlined" color='error' onClick={handleClickOpen}>
+      <Button classes={props.btnClasses} click={handleClickOpen}>
         {props.title}
       </Button>
       <Dialog
@@ -38,7 +38,7 @@ const AlertDialog = (props) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>{props.cancel}</Button>
-          <Button onClick={props.action} autoFocus>
+          <Button click={props.action} autoFocus>
             {props.confirm}
           </Button>
         </DialogActions>
