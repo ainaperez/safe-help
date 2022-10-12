@@ -4,9 +4,14 @@ import Item from './Item/Item';
 
 const Items = (props) => {
 
+    let slicedItemsArr =  props.items.slice(1);
+    console.log(slicedItemsArr);
+
     let itemList = (
         <div className='snippetItemContainer'>
-          {props.items.slice(1).map((item) => {
+          { 
+          
+          slicedItemsArr.map((item) => {
 
             return (
               <Item
@@ -17,7 +22,7 @@ const Items = (props) => {
                 ucollected={item.ucollected}
                 urgency={item.urgency}
                 key={item.id}
-                deleteiTEM={props.deleteItem}
+                deleteItem={props.deleteItem}
 
               />
             );

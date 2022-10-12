@@ -4,7 +4,6 @@ import '../../App.scss'
 import axios from 'axios'; 
 import Results from '../Results/Results';
 
-
 import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng,
@@ -21,6 +20,7 @@ const Home = () => {
     
     useEffect(() => {
         getCollectionPoints();
+
     }, [address])
    
     const handleChange = address => {
@@ -32,6 +32,7 @@ const Home = () => {
           .then(results => getLatLng(results[0]))
           .then(latLng => {
             setCoordinates([latLng.lat, latLng.lng]);
+            console.log(selectedCoordinates)
              setAddress(address);
               filterPoints();
             }
@@ -43,6 +44,7 @@ const Home = () => {
         axios.get('https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app/collectionPoints.json')
         .then(response => {
             const cpFilteredList = []
+            console.log(response)
             for(let key in response.data){
                 cpFilteredList.push({
                     cpKey: key,
@@ -50,12 +52,14 @@ const Home = () => {
                 })
             }
             setCps(cpFilteredList)
+            //setCoordinates()
         })
         .catch(err => console.log(err))    
     }
 
+    
+
     const filterPoints = () => {
-        console.log(collectionPoints)
         const filteredCPs = [];
         collectionPoints.map(cp => {
            if((cp.details.selectedCoordinates[0] > selectedCoordinates[0] - 1 &&

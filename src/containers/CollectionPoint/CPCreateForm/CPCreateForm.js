@@ -21,15 +21,7 @@ import AuthContext from '../../../AuthContext';
         availability: true, 
         address:"",
         selectedCoordinates: null, 
-        openningTimes: {
-            monday: "", 
-            tuesday: "", 
-            wednesday: "", 
-            thursday: "",
-            friday: "",
-            saturday: "",
-            sunday: ""
-        },
+        openningTimes: "",
         initiative: "", 
         additional: "", 
         responsible: "", 
@@ -248,7 +240,7 @@ import AuthContext from '../../../AuthContext';
                 availability: createForm.availability.value, 
                 address: address,
                 selectedCoordinates: cp.selectedCoordinates,
-                openingTimes: createForm.openingTimes,
+                openningTimes: createForm.openningTimes,
                 initiative: createForm.initiative.value, 
                 additional: createForm.additional.value, 
                 responsible: createForm.responsible.value, 
@@ -259,7 +251,7 @@ import AuthContext from '../../../AuthContext';
         };
         axios.post('https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app/collectionPoints.json', NewCp)
             .then(response => {
-               window.location = `${response.data.name}/createsuccess`;
+                this.props.history.push(`${response.data.name}/createsuccess`);
             }
             )
             .catch(err => console.log(err)); 

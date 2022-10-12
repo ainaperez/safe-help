@@ -17,7 +17,7 @@ const CPSnippet = (props) => {
 
     let itemList = (
         <div>
-          {items.map((item) => {
+          {items.slice(1).map((item) => {
             return (
               <SnippetItem
                 title={item.itemDetails.title}

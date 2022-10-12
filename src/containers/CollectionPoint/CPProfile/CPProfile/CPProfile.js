@@ -94,7 +94,7 @@ class CPProfile extends Component {
         axios.delete(`https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app${this.id}.json`)
         .then(response =>  {
             alert('Delete successful')
-            window.location = '/dashboard';
+            this.props.history.push('/dahsboard');
         }
         )
         .catch(error => {
@@ -112,6 +112,7 @@ class CPProfile extends Component {
         let title = (<p>Loading...</p>)
 
         if(this.state.collectionPoint) {
+            console.log(this.state.collectionPoint)
             details = (
                 <Details 
                     details={this.state.collectionPoint} deleteCP={this.deleteCP}
@@ -149,7 +150,7 @@ class CPProfile extends Component {
                 <Items 
                 items={this.state.collectionPoint.items} 
                 editItem={this.handleItemChange}
-                deleteItem={this.deleteItemHandler} />
+                deleteItem={this.deleteItemHandler} /> 
                 </div>
             )
 

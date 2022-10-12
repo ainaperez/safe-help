@@ -14,8 +14,8 @@ const Header = () => {
   
   const handleLogout = async () => {
     await logout();
-    if(window.locations !== '/'){
-      window.location = '/';
+    if(window.location !== '/'){
+      this.props.history.push('/');
     }
    
     };

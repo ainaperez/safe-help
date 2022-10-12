@@ -31,8 +31,8 @@ return (
             />
             
             <PresentFormItem 
-            title='OpeningTimes' 
-            value={props.details.openingTimes} 
+            title='OpenningTimes' 
+            value={props.details.openningTimes} 
             editItem={(e)=>props.editItem(e, 'openningTimes', 'collectionPoint')}
             saveEdit={props.saveEdit}
             /> 

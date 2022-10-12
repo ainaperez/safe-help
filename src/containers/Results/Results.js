@@ -1,43 +1,42 @@
-import React, { Component } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 import '../../App.scss';
 import CPSnippet from '../../components/CPSnippet/CPSnippet';
 import { MapContainer, TileLayer, Marker} from 'react-leaflet';
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 
-class Results extends Component {
+const Results = (props) => {
     
-    constructor(props){
-        super(props); 
-        this.provider = new OpenStreetMapProvider();
-    }; 
 
-    render(){
-        let list = (<p>Loading...</p>)
-        if(this.props.collectionPoints){
-            list = (<div className='cpList'>
-                    {this.props.collectionPoints.map(cp =>{
-                        return (
-                            <CPSnippet 
-                                title={cp.details.title}
-                                address={cp.details.address}
-                                items={cp.details.items}
-                                linkText='Go to details'
-                                url={`/collectionPoint/${cp.cpKey}`}
-                            />
-                        )
-                    }) 
-                    }
-                    </div>)}
+       
+    const provider = new OpenStreetMapProvider();
+    
+    let list = (<p>Loading...</p>)
+    if(props.collectionPoints){
+        list = (<div className='cpList'>
+                {props.collectionPoints.map(cp =>{
+                    return (
+                        <CPSnippet 
+                            title={cp.details.title}
+                            address={cp.details.address}
+                            items={cp.details.items}
+                            linkText='Go to details'
+                            url={`/collectionPoint/${cp.cpKey}`}
+                        />
+                    )
+                }) 
+                }
+                </div>)}
 
-        const coordinates = this.props.selectedCoordinates; 
+
 
     return (
         
         <div className='resultsContainer flex-row'>
-            <MapContainer className='mapContainer' center={coordinates} zoom={13} scrollWheelZoom={false}>
+            <MapContainer className='mapContainer' center={props.selectedCoordinates} zoom={13} scrollWheelZoom={false}>
+                {console.log(props.selectedCoordinates)}
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                {this.props.collectionPoints.map(cp =>{
+                {props.collectionPoints.map(cp =>{
                     let markerPosition = [cp.details.selectedCoordinates[0], cp.details.selectedCoordinates[1]]
                     return (
                         <Marker position={markerPosition}> 
@@ -53,7 +52,7 @@ class Results extends Component {
         </div>
         
     );
-}
+
 }
 
 

@@ -36,7 +36,8 @@ class CPProfileIndiv extends Component {
         let items =  [];
 
         if(this.state.collectionPoint){
-            items = this.state.collectionPoint.items
+            items = this.state.collectionPoint.items.slice(1);
+            console.log(items);
         }
 
         let details = (<p>Loading...</p>);
@@ -96,7 +97,7 @@ class CPProfileIndiv extends Component {
                 
             ); 
             
-           items = this.state.collectionPoint.items.map(item => {
+           items = this.state.collectionPoint.items.slice(1).map(item => {
             return (<div className='flex-row snippetItemContainer'>
                 <SnippetItem
                     title={item.title}
@@ -125,21 +126,21 @@ class CPProfileIndiv extends Component {
                  
             {details}
             
-            <div class='d-flex flex-row align-items-center squareContainer'>
-                <div class='flex-row'>
-                    <div class='square critical'></div>
+            <div className='d-flex flex-row align-items-center squareContainer'>
+                <div className='flex-row'>
+                    <div className='square critical'></div>
                     <p>Critical</p>
                 </div>
-                <div class='flex-row'>
-                    <div class='square high'></div>
+                <div className='flex-row'>
+                    <div className='square high'></div>
                     <p>High</p>
                 </div>
-                <div class='flex-row'>
-                    <div class='square normal'></div>
+                <div className='flex-row'>
+                    <div className='square normal'></div>
                     <p>Normal</p>
                 </div>
-                <div class='flex-row'>
-                    <div class='square low'></div>
+                <div className='flex-row'>
+                    <div className='square low'></div>
                     <p>Low</p>
                 </div>
             </div>

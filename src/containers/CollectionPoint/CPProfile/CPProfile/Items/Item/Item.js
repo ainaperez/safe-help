@@ -16,7 +16,7 @@ const Item = (props) => {
             <p>{props.ucollected}/<strong>{props.uneeded}</strong></p>
             <div>
                 <Button classes='editButton'>Edit</Button>
-                <Button click={props.deleteItem}><i class="bi bi-trash3"></i></Button>
+                <Button click={props.deleteItem}><i className="bi bi-trash3"></i></Button>
             </div>   
         </div>
      )
