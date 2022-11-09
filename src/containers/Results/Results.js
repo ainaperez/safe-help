@@ -1,7 +1,7 @@
 import React, { Component } from 'react'; 
 import '../../App.scss';
 import CPSnippet from '../../components/CPSnippet/CPSnippet';
-import { MapContainer, TileLayer, Marker} from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 
 class Results extends Component {
@@ -39,11 +39,15 @@ class Results extends Component {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 {this.props.collectionPoints.map(cp =>{
                     let markerPosition = [cp.details.selectedCoordinates[0], cp.details.selectedCoordinates[1]]
+                    console.log(cp)
+                    
                     return (
                         <Marker position={markerPosition}> 
-                            {/*<Popup>
-                        
-                            </Popup>*/}
+                            <Popup>
+                                {cp.details.title}
+                                <br />
+                                {cp.details.address}
+                            </Popup>
                         </Marker>
                     )
                     }) 
