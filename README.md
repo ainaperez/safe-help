@@ -1,73 +1,53 @@
-# Getting Started with Create React App
+# SafeHelp: Web-APP to organize collection points during humanitarian crises
 
-Aquesta aplicació segueix els scripts de Create-React-App.
-Actualment es troba en fases força incials de la programació així que els components es troben desorganitzats. Així mateix el codi no és el més eficient.
+Master Thesis
+Master's Degree in Development of Websites and Web Applications
+Computer Science, Multimedia and Telecommunications
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Abstract
 
-## Available Scripts
+This Master's Final Project Report presents the development of an initial Single Page Application that will act as a connecting point between donation collection points and donors.
+With the idea that emerged from the war in Ukraine, the application aims to be an organizing tool for collecting donations during humanitarian crises.
 
-In the project directory, you can run:
+One of the main problems encountered during the war was the lack of a communication system between those who collected donations and those who wanted to offer them. Typically using channels such as social media, organizers found it difficult to update and transmit changes to their pickup point or updates. On the other hand, donors often found themselves without a clear idea of where to donate or what was really needed.
 
-### `npm start`
+With this application it will be possible to maintain the traceability of the different collection points and will allow to provide to the different users concise and clear information.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The application will be developed with React for the front-end and with firebase as a database.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Keywords: Humanitarian Crisis, Single Page Applications, Donations, Donations, React, Firebase.
 
-### `npm test`
+## Technologies
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The application is divided into two parts: the backend, and the frontend.
 
-### `npm run build`
+For the Backend we will use Firebase, a Google tool that makes it very easy to manage databases and authentications. This app is very simple to use and connect with the front-end, which has greatly reduced the learning curve and programming fears.
+Later, in the event that the app grew, it would have to be switched to a paid plan, since daily queries are limited with the free one. Surely a more defined structure should also be implemented. Another option would be to change it to MySQL or MongoDB.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+In order to interact with the Firebase databases and functions, Axios will be used.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Git and Netlify will be used to install the application publicly.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Due to the constant changes in the application and the need to continuously scale it, it has been considered appropriate to base the architecture of the application on that of Single Page Application.
 
-### `npm run eject`
+React will help eliminate many of the complexities that appear in Single Page Applications.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+In order to develop the application in the most efficient way possible, a Build workflow will be created . This workflow will allow us to reduce the code as much as possible and optimize it in order to improve the performance of the application. We must also be able to use ES6 features but compiling them in ES5 for older browsers. Likewise, an autoprefixer CSS is also needed.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+In order to achieve all this, the workflow will include the following tools:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- NPM: Dependency Managment Tool.
+- Webpack: Bundler to be able to put all the files together.
+- Babel: will be the compiler that will transform ES6 to previous versions. Webpack will be configured to use Babel when you make the bundle.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+For this, Create-React-App, a tool created by React developers and already automatically includes all of the above tools, will be used.
 
-## Learn More
+## Apis
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The application incorporates the following APIs:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+• Autocomplete Places: This Google API allows you to incorporate inputs where users type in the address and it is autocompleted. Users can select the address, and then the API returns the coordinates. It will be very useful later to be able to use these coordinates and create dynamic maps that will show the results with the different collection points.
 
-### Code Splitting
+• Axios: This API allows you to connect the Firebase backend through requests.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+• UI Material: Similar to Bootstrap, this API provides various UI elements such as inputs, buttons, modals, etc., which streamline the functionality and stylization of the APP. Initially it was thought to use Bootstrap, but Material UI offers more functionalities such as the Autocomplete input.

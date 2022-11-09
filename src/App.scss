@@ -239,10 +239,14 @@ input {
 
 .header {
   padding: $px12;
-  background-color: $yellow;
+  background-color: $white;
+
+  p:first-child {
+    font-size: $px32;
+  }
 
   p {
-    color: $white;
+    color: $black;
   }
 }
 
@@ -291,18 +295,18 @@ input {
 //Footer
 
 .footer {
-  @include flexCol;
-  padding: 32px 0;
-  background-color: $yellow;
-
-  p {
-    color: $white;
-  }
+  display: flex; 
+  justify-content: space-between;
+  padding: $px32 $px12;
+  background-color: $white;
 
   div {
-    @include flexCol;
-    margin-top: $px32;
+    
+    button {
+     margin: 0;
+    }
   }
+  
 }
 
 .footerLogo {

@@ -1,6 +1,6 @@
 import React from 'react'; 
 import '../../App.scss';
-import logo from '../../assets/images/Logo-color.png';
+import logo from '../../assets/images/logo-green.png';
 import Button from '../../components/UI/Button';
 
 const footer = () => (
@@ -9,13 +9,12 @@ const footer = () => (
         <div>
             <Button classes='footerButton' href='#' >About &amp; contact</Button>
             <Button classes='footerButton' href='#' >FAQs</Button>
-        </div>
-
-        <div>
             <Button classes='footerButton' href='#' >Terms &amp; Conditions</Button>
-            <Button classes='footerButton' href='#' >Privacy Policy</Button>
+            <Button classes='footerButton' href='#' >Privacy Policy</Button>   
             <Button classes='footerButton' href='https://www.ainaperez.com/' >&copy; Aina Pérez Serra</Button>
         </div>
+
+       
         
      
     </div>

@@ -73,11 +73,11 @@ const Home = () => {
 
     return(
         <div >
-            <div className='heroImg'>
+            {/* <div className='heroImg'>
             <h1>WELCOME TO SAFEHELP</h1>
-            </div>
+            </div> */}
             <div className='home'>
-                <h1>Search a donation Collection point</h1>
+                <h1>Search for a donation point</h1>
                 <Aux>
                 <PlacesAutocomplete
                     value={address}

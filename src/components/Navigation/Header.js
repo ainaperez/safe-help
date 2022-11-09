@@ -7,7 +7,7 @@ import { useContext } from "react";
 import AuthContext from "../../AuthContext";
 import { logout } from '../../firebase';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import logo from '../../assets/images/Logo-color.png';
+import logo from '../../assets/images/logo-green.png';
 
 const Header = () => {
   const { user } = useContext(AuthContext);
