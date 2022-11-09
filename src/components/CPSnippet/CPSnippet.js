@@ -8,12 +8,15 @@ import { Link } from 'react-router-dom';
 
 const CPSnippet = (props) => {
   const items = []; 
-    for(let key in props.items){
+    
+  for(let key in props.items){
       items.push({
         key: key,
         itemDetails: props.items[key]
       })
     }
+
+  const itemsLength = items.length;
 
     let itemList = (
         <div>
@@ -28,9 +31,11 @@ const CPSnippet = (props) => {
           })}
         </div>
       );
-       
+     
+    console.log(itemsLength == 0)
     return(
-        <Card className='CPSnippet' sx={{ minWidth: 275 }}>
+      <Link className='CPSnippet' to={props.url}>
+        <Card sx={{ minWidth: 275 }}>
         <CardContent>
           <Typography variant="h5" component="div">
             {props.title}
@@ -38,13 +43,11 @@ const CPSnippet = (props) => {
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             {props.address}
           </Typography>
-          {itemList}
-          <CardActions>
-          <Link to={props.url}>{props.linkText}</Link>
-        </CardActions>
-        </CardContent>
-        
-      </Card>)
+          {itemsLength == 0 ? null : itemList }
+        </CardContent>  
+      </Card>
+      </Link>
+      )
         
     
    

@@ -35,11 +35,13 @@ const Dashboard = () => {
     if(collectionPoints){
         cps = ( 
             collectionPoints.map(cp => {
+                console.log(cp);
                 return (
                     <CPSnippet  
                         title={cp.details.title}
-                        address={cp.details.title}
+                        address={cp.details.address}
                         linkText='Edit'
+                        availabilit={cp.details.availability}
                         url={`/collectionPoints/${cp.key}`}
                     />
                 )
