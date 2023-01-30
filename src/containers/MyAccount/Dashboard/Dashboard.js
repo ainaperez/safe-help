@@ -30,6 +30,10 @@ const Dashboard = () => {
         .catch(err => console.log(err))
     }
 
+    const saveEdit = () => {
+        
+    }
+
     let cps = (<p>Loading...</p>) 
 
     if(collectionPoints){

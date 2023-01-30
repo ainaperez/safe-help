@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from './Button';
 import Modal from 'react-bootstrap/Modal'; 
+import Input from './Input/Input.js'; 
 const FormModal = (props) => (
 
 
@@ -9,7 +10,17 @@ const FormModal = (props) => (
       <Modal.Title>{props.title}</Modal.Title>
     </Modal.Header>
     <Modal.Body>
-      <input type='textArea' onChange={props.editItem}></input>
+      <Input 
+      label={formElement.config.label}
+      key={formElement.id}
+      elementType={formElement.config.elementType}
+      elementConfig={formElement.config.elementConfig}
+      value={formElement.config.value}
+      invalid={!formElement.config.valid}
+      shouldValidate={formElement.config.validation}
+      touched={formElement.config.touched}
+      changed={(event) => this.inputChangedHandler(event, formElement.id)} 
+      type='textArea' onChange={props.editItem}></Input>
     </Modal.Body>
     <Modal.Footer>
       <Button classes='dangerButton' variant="secondary" click={props.onHide}>

@@ -16,7 +16,9 @@ const Settings = (props) => {
                  <PresentFormItem 
                  title='Name' 
                  value={user.displayName} 
-                 link='/register' />
+                 link='/register'
+                
+                 />
 
                  <PresentFormItem 
                  title='Email' 

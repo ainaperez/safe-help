@@ -4,7 +4,6 @@ import '../../App.scss'
 import axios from 'axios'; 
 import Results from '../Results/Results';
 
-
 import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng,
@@ -77,7 +76,7 @@ const Home = () => {
             <h1>WELCOME TO SAFEHELP</h1>
             </div> */}
             <div className='home'>
-                <h1>Search for a donation point</h1>
+                <h1>Search for a donation collection point</h1>
                 <Aux>
                 <PlacesAutocomplete
                     value={address}

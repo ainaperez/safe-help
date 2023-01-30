@@ -23,7 +23,12 @@ const firebaseConfig = {
     projectId: "safe-help-57776",
     storageBucket: "safe-help-57776.appspot.com",
     messagingSenderId: "179670199810",
-    appId: "1:179670199810:web:ccb86ef4ccc44fdeb0011b"
+    appId: "1:179670199810:web:ccb86ef4ccc44fdeb0011b", 
+      "rules": {
+        ".read": false,
+        ".write": false
+      
+    }
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
