@@ -33,7 +33,7 @@ class CPProfileIndiv extends Component {
 
     render() {
 
-        let items =  [];
+        let items = [];
 
         if(this.state.collectionPoint){
             items = this.state.collectionPoint.items
@@ -110,11 +110,6 @@ class CPProfileIndiv extends Component {
 
             
         }
-
-
-        
-
-        
         
       
         return (

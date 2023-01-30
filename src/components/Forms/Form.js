@@ -46,9 +46,9 @@ const Form = () => {
             formIsValid = updatedRegisterForm[inputIdentifier].valid && formIsValid;
         }
         this.setState({registerForm: updatedRegisterForm, formIsValid: formIsValid});
-    }
+    };
 
-    checkValidity(value, rules) {
+    checkValidity(value, rules) =  () => {
         let isValid = true;
         if (!rules) {
             return true;
@@ -83,26 +83,22 @@ const Form = () => {
 
         return isValid;
     }
+    const formType = (formType) => {
 
-
-    render() {
-
-        const formType = (formType) => {
-
-            const type = '';
-            switch(formType) {
-                case 'register': 
-                    return 
-            }
+        const type = '';
+        switch(formType) {
+            case 'register': 
+                return 
         }
+    }
 
-        const formElementsArray = [];
-        for (let key in this.state.registerForm) {
-            formElementsArray.push({
-                id: key,
-                config: this.state.registerForm[key]
-            });
-        }
+    const formElementsArray = [];
+    for (let key in this.state.registerForm) {
+        formElementsArray.push({
+            id: key,
+            config: this.state.registerForm[key]
+        });
+    }
         let form = (
             <form>
                 {formElementsArray.map(formElement => (
@@ -135,7 +131,7 @@ const Form = () => {
                 <p className='acc'>You already have an account? <a href='/login'><strong>login</strong></a></p>
             </div>
         );
-    }
 }
+
 
 export default Form; 
