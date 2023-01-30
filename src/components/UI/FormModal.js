@@ -11,16 +11,16 @@ const FormModal = (props) => (
     </Modal.Header>
     <Modal.Body>
       <Input 
-      label={formElement.config.label}
-      key={formElement.id}
-      elementType={formElement.config.elementType}
-      elementConfig={formElement.config.elementConfig}
-      value={formElement.config.value}
-      invalid={!formElement.config.valid}
-      shouldValidate={formElement.config.validation}
-      touched={formElement.config.touched}
-      changed={(event) => this.inputChangedHandler(event, formElement.id)} 
-      type='textArea' onChange={props.editItem}></Input>
+          label={props.formElement.config.label}
+          key={props.formElement.id}
+          elementType={props.formElement.config.elementType}
+          elementConfig={props.formElement.config.elementConfig}
+          value={props.formElement.config.value}
+          invalid={!props.formElement.config.valid}
+          shouldValidate={props.formElement.config.validation}
+          touched={props.formElement.config.touched}
+          changed={(event) => this.inputChangedHandler(event, props.formElement.id)} 
+          type='textArea' onChange={props.editItem}></Input>
     </Modal.Body>
     <Modal.Footer>
       <Button classes='dangerButton' variant="secondary" click={props.onHide}>
