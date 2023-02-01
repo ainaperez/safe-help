@@ -14,7 +14,7 @@ const CPProfileIndiv = (props) => {
         axios.get(`https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app${this.id}.json`)
         .then(response => {
             this.setState({
-                collectionPoint: response.data
+                 collectionPoint: response.data
             }) 
          }  
         )
@@ -94,49 +94,47 @@ const CPProfileIndiv = (props) => {
             <p>{item.ucollected}/<strong>{item.uneeded}</strong></p>
         </div>
         )
-    })
-        
+    })  
       
-        return (
-            <div>
-            {title}
-            <div>
-                
-                 
-            {details}
-            
-            <div class='d-flex flex-row align-items-center squareContainer'>
-                <div class='flex-row'>
-                    <div class='square critical'></div>
-                    <p>Critical</p>
-                </div>
-                <div class='flex-row'>
-                    <div class='square high'></div>
-                    <p>High</p>
-                </div>
-                <div class='flex-row'>
-                    <div class='square normal'></div>
-                    <p>Normal</p>
-                </div>
-                <div class='flex-row'>
-                    <div class='square low'></div>
-                    <p>Low</p>
-                </div>
+    return (
+        <div>
+        {title}
+        <div>
+        
+        {details}
+        
+        <div class='d-flex flex-row align-items-center squareContainer'>
+            <div class='flex-row'>
+                <div class='square critical'></div>
+                <p>Critical</p>
             </div>
-
-            <Divider />
-
-            <div className='flex-row snippetItemContainer'>
-                <p>Item</p>
-                <p>Units Collected / <br /><strong>Units Needed</strong></p>
+            <div class='flex-row'>
+                <div class='square high'></div>
+                <p>High</p>
             </div>
-
-            {items}
-    
+            <div class='flex-row'>
+                <div class='square normal'></div>
+                <p>Normal</p>
             </div>
-
+            <div class='flex-row'>
+                <div class='square low'></div>
+                <p>Low</p>
             </div>
-        );
+        </div>
+
+        <Divider />
+
+        <div className='flex-row snippetItemContainer'>
+            <p>Item</p>
+            <p>Units Collected / <br /><strong>Units Needed</strong></p>
+        </div>
+
+        {items}
+
+        </div>
+
+        </div>
+    );
     }
 }
 
