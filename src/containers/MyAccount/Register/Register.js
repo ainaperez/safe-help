@@ -1,4 +1,4 @@
-import React, { Component } from 'react'; 
+import React, { useState } from 'react'; 
 import '../../../App.scss';
 import Button from 'react-bootstrap/Button'; 
 import Input from '../../../components/UI/Input/Input'; 
@@ -7,72 +7,60 @@ import {
     signInWithGoogle,
   } from "../../../firebase";
 
-
-
-
-class Register extends Component {
-
-
-    state = {
-        registerForm: {
-            name: {
-                label: 'Legal Name',
-                elementType: 'input',
-                elementConfig: {
-                    type: 'text',
-                    placeholder: 'Your Legal Name'
-                },
-                value: '',
-                validation: {
-                    required: true
-                },
-                valid: false,
-                touched: false
+const Register = () =>{
+    const [registerForm, setRegisterForm] = useState({
+        name: {
+            label: 'Legal Name',
+            elementType: 'input',
+            elementConfig: {
+                type: 'text',
+                placeholder: 'Your Legal Name'
             },
-            email: {
-                label: 'Email',
-                elementType: 'input',
-                elementConfig: {
-                    type: 'email',
-                    placeholder: 'Your E-Mail'
-                },
-                value: '',
-                validation: {
-                    required: true,
-                    isEmail: true
-                },
-                valid: false,
-                touched: false
+            value: '',
+            validation: {
+                required: true
             },
-            password:{
-                label: 'Password',
-                elementType: 'input',
-                elementConfig: {
-                    type: 'password',
-                    placeholder: 'Enter a password'
-                },
-                value: '',
-                validation: {
-                    required: true,
-                    isPassword: true
-                },
-                valid: false,
-                touched: false
-            } 
-           
+            valid: false,
+            touched: false
         },
-        formIsValid: false,
-        loading: false
-    }
+        email: {
+            label: 'Email',
+            elementType: 'input',
+            elementConfig: {
+                type: 'email',
+                placeholder: 'Your E-Mail'
+            },
+            value: '',
+            validation: {
+                required: true,
+                isEmail: true
+            },
+            valid: false,
+            touched: false
+        },
+        password:{
+            label: 'Password',
+            elementType: 'input',
+            elementConfig: {
+                type: 'password',
+                placeholder: 'Enter a password'
+            },
+            value: '',
+            validation: {
+                required: true,
+                isPassword: true
+            },
+            valid: false,
+            touched: false
+        } 
+       
+    }); 
+    const [formIsValid, setFormIsValid] = useState(false); 
+    const [loading, setLoading] = useState(false);
 
-
-    componentDidMount(){
-
-    }
-
-    inputChangedHandler = (event, inputIdentifier) => {
+    const inputChangedHandler = (event, inputIdentifier) => {
         const updatedRegisterForm = {
-            ...this.state.registerForm
+            ...registerForm
         };
      
         const updatedFormElement = { 
@@ -80,7 +68,7 @@ class Register extends Component {
         };
         updatedFormElement.value = event.target.value;
        
-        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
         updatedFormElement.touched = true;
         updatedRegisterForm[inputIdentifier] = updatedFormElement;
         
@@ -88,10 +76,11 @@ class Register extends Component {
         for (let inputIdentifier in updatedRegisterForm) {
             formIsValid = updatedRegisterForm[inputIdentifier].valid && formIsValid;
         }
-        this.setState({registerForm: updatedRegisterForm, formIsValid: formIsValid});
+        setRegisterForm({registerForm: updatedRegisterForm });
+        setFormIsValid({formIsValid: formIsValid});
     }
 
-    checkValidity(value, rules) {
+    const checkValidity = (value, rules) => {
         let isValid = true;
         if (!rules) {
             return true;
@@ -127,50 +116,46 @@ class Register extends Component {
         return isValid;
     }
 
-
-    render() {
-
-        const formElementsArray = [];
-        for (let key in this.state.registerForm) {
-            formElementsArray.push({
-                id: key,
-                config: this.state.registerForm[key]
-            });
-        }
-        let form = (
-            <form>
-                {formElementsArray.map(formElement => (
-                    <Input 
-                    label={formElement.config.label}
-                        key={formElement.id}
-                        elementType={formElement.config.elementType}
-                        elementConfig={formElement.config.elementConfig}
-                        value={formElement.config.value}
-                        invalid={!formElement.config.valid}
-                        shouldValidate={formElement.config.validation}
-                        touched={formElement.config.touched}
-                        changed={(event) => this.inputChangedHandler(event, formElement.id)} />
-                ))}
-                <Button onClick={() => registerWithEmailAndPassword(this.state.registerForm.name.value, this.state.registerForm.email.value, this.state.registerForm.password.value)} disabled={!this.state.formIsValid}>REGISTER</Button>
-                <Button
-          className=""
-          onClick={signInWithGoogle}>Register with Google</Button>
-            </form>
-        )
-        return (
-            <div className='smallWrapper'>
-                 <h1>Register for organizers</h1>
-                    <div className='formContainer'>
-                        <div className='container'>
-                        {form}
-                        </div>
-                    </div>
-
-                <p className='acc'>You already have an account? <a href='/login'><strong>login</strong></a></p>
-            </div>
-        );
+    const formElementsArray = [];
+    for (let key in registerForm) {
+        formElementsArray.push({
+            id: key,
+            config: registerForm[key]
+        });
     }
-}
+    let form = (
+        <form>
+            {formElementsArray.map(formElement => (
+                <Input 
+                label={formElement.config.label}
+                    key={formElement.id}
+                    elementType={formElement.config.elementType}
+                    elementConfig={formElement.config.elementConfig}
+                    value={formElement.config.value}
+                    invalid={!formElement.config.valid}
+                    shouldValidate={formElement.config.validation}
+                    touched={formElement.config.touched}
+                    changed={(event) => inputChangedHandler(event, formElement.id)} />
+            ))}
+            <Button onClick={() => registerWithEmailAndPassword(registerForm.name.value, registerForm.email.value, registerForm.password.value)} disabled={!formIsValid}>REGISTER</Button>
+            <Button
+        className=""
+        onClick={signInWithGoogle}>Register with Google</Button>
+        </form>
+    )
+    return (
+        <div className='smallWrapper'>
+                <h1>Register for organizers</h1>
+                <div className='formContainer'>
+                    <div className='container'>
+                    {form}
+                    </div>
+                </div>
+
+            <p className='acc'>You already have an account? <a href='/login'><strong>login</strong></a></p>
+        </div>
+    );
+} ;
 
 export default Register
 ; 

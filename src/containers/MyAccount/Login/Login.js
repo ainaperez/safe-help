@@ -1,60 +1,55 @@
-import React, { Component} from 'react';
+import React, { useState } from 'react';
 
 import '../../../App.scss';
 import Button from '../../../components/UI/Button'; 
 import Input from '../../../components/UI/Input/Input'; 
 import {logInWithEmailAndPassword, signInWithGoogle, sendPasswordReset } from '../../../firebase';
 
+const Login  = () => {
 
-class Login extends Component {
+    const [loginForm, setLoginForm] = useState({
+        email: {
+            label: 'Email',
+            elementType: 'input',
+            elementConfig: {
+                type: 'email',
+                placeholder: 'Your E-Mail'
+            },
+            value: '',
+            validation: {
+                required: true,
+                isEmail: true
+            },
+            valid: false,
+            touched: false
+        },
+        password:{
+            label: 'Password',
+            elementType: 'input',
+            elementConfig: {
+                type: 'password',
+                placeholder: 'Enter a password'
+            },
+            value: '',
+            validation: {
+                required: true,
+                isPassword: true
+            },
+            valid: false,
+            touched: false
+        },
+    }); 
 
-    constructor(){
-        super();
-        this.state = {
-            loginForm: {
-                email: {
-                    label: 'Email',
-                    elementType: 'input',
-                    elementConfig: {
-                        type: 'email',
-                        placeholder: 'Your E-Mail'
-                    },
-                    value: '',
-                    validation: {
-                        required: true,
-                        isEmail: true
-                    },
-                    valid: false,
-                    touched: false
-                },
-                password:{
-                    label: 'Password',
-                    elementType: 'input',
-                    elementConfig: {
-                        type: 'password',
-                        placeholder: 'Enter a password'
-                    },
-                    value: '',
-                    validation: {
-                        required: true,
-                        isPassword: true
-                    },
-                    valid: false,
-                    touched: false
-                },
-            }
-        }
-    }
-
+    const [formIsValid, setFormIsValid] = useState(false)
     
-    loginHandler = (e) =>{
+    const loginHandler = (e) =>{
         e.preventDefault();
-       logInWithEmailAndPassword(this.state.loginForm.email.value, this.state.loginForm.password.value); 
+       logInWithEmailAndPassword(loginForm.email.value, loginForm.password.value); 
     }
 
-    inputChangedHandler = (event, inputIdentifier) => {
+    const inputChangedHandler = (event, inputIdentifier) => {
         const updatedForm = {
-            ...this.state.loginForm
+            ...loginForm
         };
        
         const updatedFormElement = { 
@@ -62,7 +57,7 @@ class Login extends Component {
         };
         
         updatedFormElement.value = event.target.value;
-        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
         updatedFormElement.touched = true;
         updatedForm[inputIdentifier] = updatedFormElement;
         
@@ -72,7 +67,7 @@ class Login extends Component {
         }
         this.setState({loginForm: updatedForm, formIsValid: formIsValid});
     }
-    checkValidity(value, rules) {
+    const checkValidity = (value, rules) => {
         let isValid = true;
         if (!rules) {
             return true;
@@ -95,14 +90,13 @@ class Login extends Component {
         return isValid;
     }
 
-    render() {
-        const formElementsArray = [];
-        for (let key in this.state.loginForm) {
-            formElementsArray.push({
-                id: key,
-                config: this.state.loginForm[key]
-            });
-        }
+    const formElementsArray = [];
+    for (let key in loginForm) {
+        formElementsArray.push({
+            id: key,
+            config: loginForm[key]
+        });
+    }
 
         let form = (
             <form onSubmit={this.loginHandler}>
@@ -116,12 +110,12 @@ class Login extends Component {
                         invalid={!formElement.config.valid}
                         shouldValidate={formElement.config.validation}
                         touched={formElement.config.touched}
-                        changed={(event) => this.inputChangedHandler(event, formElement.id)} />
+                        changed={(event) => inputChangedHandler(event, formElement.id)} />
                 ))}
                 <Button 
                     classes='basicButton'
                     type='submit' 
-                    disabled={!this.state.formIsValid}>LOGIN</Button>
+                    disabled={!formIsValid}>LOGIN</Button>
                 <Button 
                     classes='basicButton' 
                     click={signInWithGoogle}>Login with Google</Button>
@@ -144,8 +138,7 @@ class Login extends Component {
                 </div> 
             </div>
         );
-    }
-}; 
+    };
 
 
 export default Login; 

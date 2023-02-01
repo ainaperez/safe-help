@@ -1,4 +1,4 @@
-import React, { Component } from 'react'; 
+import React, { useState } from 'react'; 
 import axios from 'axios'; 
 import Button from '../../../../components/UI/Button';
 import Tabs from 'react-bootstrap/Tabs';
@@ -7,34 +7,14 @@ import Tab from 'react-bootstrap/Tab';
 import Details from './Details/Details';
 import Items from './Items/Items';
 
-class CPProfile extends Component {
-    state = {
-        collectionPoint: null, 
-        item: {
-            title: '', 
-            urgency: '', 
-            ucollected: '', 
-            uneeded: ''
-        }
-        }
-    
-   constructor(props){
-       super(props)
-       this.id = window.location.pathname;
-       
-        this.getCollectionPoint =this.getCollectionPoint.bind(this);
-        this.addItemHandler = this.addItemHandler.bind(this);
-        this.inputChangedHandler = this.inputChangedHandler.bind(this);
-        this.saveChanges = this.saveChanges.bind(this);
-        this.editItemHandler = this.editItemHandler.bind(this); 
-        this.deleteItemHandler = this.deleteItemHandler.bind(this);
-    };
+const CPProfile = () => {
 
-    componentDidMount() {
-        this.getCollectionPoint();  
-    }
+    const [collectionPoint, setCollectionPoint] = useState(null);
+    const [item, setItem] = useState({title: "", urgency: "", ucollected: "", uneeded: ""}); 
 
-    getCollectionPoint =() =>{
+    const id = window.location.pathname;
+
+    const getCollectionPoint =() =>{
         axios.get(`https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app${this.id}.json`)
         .then(response => {
             this.setState({
@@ -45,52 +25,51 @@ class CPProfile extends Component {
         .catch(err => console.log('getCollectionPoint'+err))
     }
 
-    addItemHandler = (e) => {
+    const addItemHandler = (e) => {
         
         e.preventDefault();
         const item = {
-            title: this.state.item.title,
-            urgency: this.state.item.urgency , 
-            uneeded: this.state.item.uneeded, 
-            ucollected: this.state.item.ucollected 
+            title: item.title,
+            urgency: item.urgency , 
+            uneeded: item.uneeded, 
+            ucollected: item.ucollected 
         }
-        this.state.collectionPoint.items.push(item);
-        axios.put(`https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app${this.id}.json`, this.state.collectionPoint)
+        collectionPoint.items.push(item);
+        axios.put(`https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app${this.id}.json`, collectionPoint)
         .then(response => {
             this.getCollectionPoint();
         })
         .catch(err => console.log(err)); 
-
     }
 
-    inputChangedHandler = ( event, inputIdentifier) => {
+    const inputChangedHandler = ( event, inputIdentifier) => {
         const updatedForm = {
-            ...this.state.item
+            ...item
         };   
         updatedForm[inputIdentifier] = event.target.value;
         this.setState({item : updatedForm});
     }
 
-    saveChanges = () => {
-        axios.put(`https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app${this.id}.json`, this.state.collectionPoint)
+    const saveChanges = () => {
+        axios.put(`https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app${this.id}.json`, collectionPoint)
         .then(response => {
-            this.getCollectionPoint()
+            getCollectionPoint()
         }).catch(error => {
             alert(`Error: ${error.message}`);
             console.error('There was an error!', error);
         })
     }
 
-    editItemHandler = (event) => {
+    const editItemHandler = (event) => {
       event.preventDefault(); 
       //Todo Edit Item Form
     }
 
-    deleteItemHandler = () => {
+    const deleteItemHandler = () => {
 
     }
 
-    deleteCP = () => {
+    const deleteCP = () => {
         axios.delete(`https://safe-help-57776-default-rtdb.europe-west1.firebasedatabase.app${this.id}.json`)
         .then(response =>  {
             alert('Delete successful')
@@ -103,81 +82,68 @@ class CPProfile extends Component {
         });
     }
 
-    render() {
-
-       
-
-        let details = (<p>Loading...</p>);
-        let addItemForm = (<p>Loading...</p>)
-        let title = (<p>Loading...</p>)
-
-        if(this.state.collectionPoint) {
-            details = (
-                <Details 
-                    details={this.state.collectionPoint} deleteCP={this.deleteCP}
-                    editItem={this.inputChangedHandler}
-                    saveEdit={this.saveChanges}
-                />
-            );  
-
-            addItemForm = (
-                <div className='smallWrapper'>
-                <div className='formContainer'>
-                    <div className='inputContainer'>
-                        <form onSubmit={this.addItemHandler} >
-                            <label className='Label' htmlFor='cpItem'>Item</label>
-                            <input className='InputElement' type='text' name='cpItem' placeholder='enter item title' onChange={(e)=>this.inputChangedHandler(e, 'title')} />
-                            <label className='Label' htmlFor='searchItem'>Urgency</label>
-                            <select className='InputElement' name='urgency' placeholder='search item' onChange={(e)=>this.inputChangedHandler(e, 'urgency')}>
-                                <option value='low'>Low</option>
-                                <option value='normal'>Normal</option>
-                                <option value='high'>High</option>
-                                <option value='critical'>Critical</option>
-                            </select>
-                            <label className='Label' htmlFor='uneeded'>Units needed</label>
-                            <input className='InputElement' type='number' name='uneeded' placeholder='xxxx' onChange={(e)=>this.inputChangedHandler(e, 'uneeded')}/>
-                            <label className='Label' htmlFor='ucollected'>Units collected</label>
-                            <input className='InputElement' type='number' name='ucollected' placeholder='xxxx' onChange={(e)=>this.inputChangedHandler(e, 'ucollected')} />
-                  
-                            <Button classes='basicButton' type='submit'>ADD</Button>
-                    </form>
-                    </div>
-                </div>
+    let details, addItemForm, title = (<p>Loading...</p>);
     
-                <hr />
-    
-                <Items 
-                items={this.state.collectionPoint.items} 
-                editItem={this.handleItemChange}
-                deleteItem={this.deleteItemHandler} />
+    if(collectionPoint) {
+        details = (
+            <Details 
+                details={collectionPoint} deleteCP={this.deleteCP}
+                editItem={this.inputChangedHandler}
+                saveEdit={this.saveChanges}
+            />
+        );  
+
+        addItemForm = (
+            <div className='smallWrapper'>
+            <div className='formContainer'>
+                <div className='inputContainer'>
+                    <form onSubmit={this.addItemHandler} >
+                        <label className='Label' htmlFor='cpItem'>Item</label>
+                        <input className='InputElement' type='text' name='cpItem' placeholder='enter item title' onChange={(e)=>this.inputChangedHandler(e, 'title')} />
+                        <label className='Label' htmlFor='searchItem'>Urgency</label>
+                        <select className='InputElement' name='urgency' placeholder='search item' onChange={(e)=>this.inputChangedHandler(e, 'urgency')}>
+                            <option value='low'>Low</option>
+                            <option value='normal'>Normal</option>
+                            <option value='high'>High</option>
+                            <option value='critical'>Critical</option>
+                        </select>
+                        <label className='Label' htmlFor='uneeded'>Units needed</label>
+                        <input className='InputElement' type='number' name='uneeded' placeholder='xxxx' onChange={(e)=>this.inputChangedHandler(e, 'uneeded')}/>
+                        <label className='Label' htmlFor='ucollected'>Units collected</label>
+                        <input className='InputElement' type='number' name='ucollected' placeholder='xxxx' onChange={(e)=>this.inputChangedHandler(e, 'ucollected')} />
+                
+                        <Button classes='basicButton' type='submit'>ADD</Button>
+                </form>
                 </div>
-            )
-
-            title= (<h1>{this.state.collectionPoint.title}</h1>)
-        }
-
-
-        
-
-        
-        
-      
-        return (
-            <div className='cpProfile'>
-                 {title}
-                 <Tabs defaultActiveKey="details" id="uncontrolled-tab-example" className="mb-3">
-                    <Tab eventKey="details" title="Details">
-                        {details}
-                    </Tab>
-                    <Tab eventKey="items" title="items">
-                        {addItemForm}
-                    </Tab>
-                </Tabs>
-
-                 
             </div>
-        );
+
+            <hr />
+
+            <Items 
+            items={collectionPoint.items} 
+            editItem={this.handleItemChange}
+            deleteItem={this.deleteItemHandler} />
+            </div>
+        )
+
+        title= (<h1>{collectionPoint.title}</h1>)
     }
+
+    return (
+        <div className='cpProfile'>
+                {title}
+                <Tabs defaultActiveKey="details" id="uncontrolled-tab-example" className="mb-3">
+                <Tab eventKey="details" title="Details">
+                    {details}
+                </Tab>
+                <Tab eventKey="items" title="items">
+                    {addItemForm}
+                </Tab>
+            </Tabs>
+
+                
+        </div>
+    );
 }
 
 export default CPProfile; 
