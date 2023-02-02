@@ -99,7 +99,7 @@ const Login  = () => {
     }
 
         let form = (
-            <form onSubmit={this.loginHandler}>
+            <form onSubmit={loginHandler}>
                 {formElementsArray.map(formElement => (
                     <Input 
                         label={formElement.config.label}
